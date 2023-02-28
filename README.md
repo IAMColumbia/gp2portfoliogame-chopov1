@@ -1,5 +1,5 @@
 # GameProgramming2 Final
- Game Programming 2 Final Template
+Mack's Game Programming 2 Final Template
 
 Game Name:  
 Description Short:  
