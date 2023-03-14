@@ -21,7 +21,7 @@ namespace RhythmGameLibrary
         protected Texture2D spriteTexture;
         public string TextureName;
         protected float scale;
-        public float Rotation { get; private set; }
+        public float Rotation { get; protected set; }
         protected float transparency;
         protected float rotationVelocity;
         protected Vector2 origin;
@@ -34,7 +34,7 @@ namespace RhythmGameLibrary
             TextureName = texturename;
             scale = 1.8f;
             Rotation = 0;
-            rotationVelocity = 6f;
+            rotationVelocity = 0.1f;
             transparency = 1;
             Position = new Vector2(100, 100);
         }
@@ -59,6 +59,11 @@ namespace RhythmGameLibrary
             updateRotation();
         }
 
+        protected virtual void updateRotation()
+        {
+            Rotation = (float)Math.Atan2((double)Direction.Y, (double)Direction.X);
+        }
+
         protected Vector2 getDirectionFromRotation()
         {
             return new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
@@ -72,25 +77,8 @@ namespace RhythmGameLibrary
             Rect.Height = (int)(spriteTexture.Height * this.scale);
         }
 
-        void rotate()
-        {
-            if (Direction.X > 0)
-            {
-                Rotation -= MathHelper.ToRadians(rotationVelocity);
-            }
-            if (Direction.X < 0)
-            {
-                Rotation += MathHelper.ToRadians(rotationVelocity);
-            }
-        }
-
-        void setDirection()
-        {
-
-        }
-
         #region old Attempt at rotation
-        private void updateRotation()
+        /*private void updateRotation()
         {
             if (Direction.X < 0)
             {
@@ -109,7 +97,7 @@ namespace RhythmGameLibrary
                 setRotationValue(MathHelper.ToRadians(90));
             }
             
-        }
+        }*/
         float getAngle(float s, float e)
         {
             float d = e -s;

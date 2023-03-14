@@ -21,16 +21,47 @@ namespace RhythmShooter
 
         public Vector2 ShootDir;
 
+        Vector2 rotationDir;
+
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, frames, frameTime, camera)
         {
             controller= new PlayerController(playerNumber);
             maxSpeed= 1.0f;
             acceleration = 0.06f;
             friction = 0.02f;
-
             gun = new ProjectileSpawner(game, this,camera, 3);
         }
 
+        protected override void updateRotation()
+        {
+            Rotation = (float)Math.Atan2((double)rotationDir.Y, (double)rotationDir.X);
+        }
+
+        private void updateRotationDir()
+        {
+            if(Direction.X > 0.1 || Direction.X < -0.1)
+            {
+                if (Direction.X > rotationDir.X)
+                {
+                    rotationDir.X += rotationVelocity;
+                }
+                if (Direction.X < rotationDir.X)
+                {
+                    rotationDir.X -= rotationVelocity;
+                }
+            }
+            if(Direction.Y > 0.1 || Direction.Y < -0.1)
+            {
+                if (Direction.Y > rotationDir.Y)
+                {
+                    rotationDir.Y += rotationVelocity;
+                }
+                if (Direction.Y < rotationDir.Y)
+                {
+                    rotationDir.Y -= rotationVelocity;
+                }
+            }
+        }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -40,6 +71,11 @@ namespace RhythmShooter
             checkForShoot();
             setVelocity();
             keepOnScreen();
+
+            updateRotationDir();
+
+            Debug.WriteLine("Direction: " + Direction);
+            Debug.WriteLine("Rotation Direction: " + rotationDir);
         }
 
         private bool hasShot;
@@ -62,7 +98,6 @@ namespace RhythmShooter
 
         public void movePlayer(GameTime gameTime)
         {
-            updateVelocity();
             Position += velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             addFriction();
         }
@@ -74,7 +109,6 @@ namespace RhythmShooter
                 setVelocity();
             }
         }
-        #region oldVelocity
         private void setVelocity()
         {
             if(Direction.X > 0)
@@ -94,7 +128,6 @@ namespace RhythmShooter
                 velocity.Y = Math.Max(-maxSpeed, velocity.Y - acceleration);
             }
         }
-        #endregion
         private void addFriction()
         {
             //Debug.WriteLine(Direction);
@@ -120,11 +153,6 @@ namespace RhythmShooter
                     velocity.Y = Math.Min(0, velocity.Y + friction);
                 }
             }
-        }
-
-        private void addForce()
-        {
-
         }
 
         private void keepOnScreen()

@@ -16,7 +16,7 @@ namespace RhythmShooter
         {
             camera = new Camera(game); 
             player = new Player(game, 0,"TestShip2", 1, 1, camera);
-            player = new Player(game, 1,"TestShip1", 1, 2, camera);
+            //player = new Player(game, 1,"TestShip1", 1, 2, camera);
         }
     }
 }
