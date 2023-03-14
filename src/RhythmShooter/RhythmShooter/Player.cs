@@ -21,25 +21,38 @@ namespace RhythmShooter
 
         public Vector2 ShootDir;
 
+        Vector2 rotationDir;
+
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, frames, frameTime, camera)
         {
             controller= new PlayerController(playerNumber);
             maxSpeed= 1.0f;
             acceleration = 0.06f;
             friction = 0.02f;
-
             gun = new ProjectileSpawner(game, this,camera, 3);
+        }
+
+        protected override void updateRotation()
+        {
+            Rotation = (float)Math.Atan2((double)rotationDir.Y, (double)rotationDir.X);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             controller.Update();
-            Direction= controller.Direction;
+            //rotationDir = getDirectionFromMouse();
+            Direction = controller.Direction;
             movePlayer(gameTime);
             checkForShoot();
-            setVelocity();
             keepOnScreen();
+            setVelocity();
+
+        }
+
+        public void SetRotation(Vector2 otherpos)
+        {
+            rotationDir = Vector2.Normalize(Position - otherpos);
         }
 
         private bool hasShot;
@@ -62,19 +75,15 @@ namespace RhythmShooter
 
         public void movePlayer(GameTime gameTime)
         {
-            updateVelocity();
             Position += velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             addFriction();
         }
 
-        private void updateVelocity()
+        private Vector2 getDirectionFromMouse()
         {
-            if (controller.IsAccelerating)
-            {
-                setVelocity();
-            }
+            return Vector2.Normalize(Position - controller.MousePos);
         }
-        #region oldVelocity
+
         private void setVelocity()
         {
             if(Direction.X > 0)
@@ -94,10 +103,8 @@ namespace RhythmShooter
                 velocity.Y = Math.Max(-maxSpeed, velocity.Y - acceleration);
             }
         }
-        #endregion
         private void addFriction()
         {
-            //Debug.WriteLine(Direction);
             if(Direction.X == 0)
             {
                 if (velocity.X > 0)
@@ -120,11 +127,6 @@ namespace RhythmShooter
                     velocity.Y = Math.Min(0, velocity.Y + friction);
                 }
             }
-        }
-
-        private void addForce()
-        {
-
         }
 
         private void keepOnScreen()

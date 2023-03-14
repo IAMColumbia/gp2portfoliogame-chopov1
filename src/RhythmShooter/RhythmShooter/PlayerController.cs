@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using RhythmGameLibrary;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace RhythmShooter
 {
     public class PlayerController : InputHandler
     {
         public Vector2 Direction { get; private set; }
+        public Vector2 MousePos;
         public bool IsShooting { get; private set; }
         public bool IsAccelerating { get; private set; }
         int playerNumber;
@@ -25,6 +27,7 @@ namespace RhythmShooter
             base.Update();
             setDirection(playerNumber);
             checkInputs(playerNumber);
+            setMousePos();
         }
 
         private void setDirection(int playerNum)
@@ -35,8 +38,14 @@ namespace RhythmShooter
             }
             else
             {
+                
                 Direction = KeyboardDirection(playerNum);
             }
+        }
+
+        private void setMousePos()
+        {
+            MousePos = Mouse.GetState().Position.ToVector2();
         }
 
         private void checkInputs(int playerNum)
