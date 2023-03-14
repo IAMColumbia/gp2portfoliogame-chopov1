@@ -37,45 +37,22 @@ namespace RhythmShooter
             Rotation = (float)Math.Atan2((double)rotationDir.Y, (double)rotationDir.X);
         }
 
-        private void updateRotationDir()
-        {
-            if(Direction.X > 0.1 || Direction.X < -0.1)
-            {
-                if (Direction.X > rotationDir.X)
-                {
-                    rotationDir.X += rotationVelocity;
-                }
-                if (Direction.X < rotationDir.X)
-                {
-                    rotationDir.X -= rotationVelocity;
-                }
-            }
-            if(Direction.Y > 0.1 || Direction.Y < -0.1)
-            {
-                if (Direction.Y > rotationDir.Y)
-                {
-                    rotationDir.Y += rotationVelocity;
-                }
-                if (Direction.Y < rotationDir.Y)
-                {
-                    rotationDir.Y -= rotationVelocity;
-                }
-            }
-        }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             controller.Update();
-            Direction= controller.Direction;
+            //rotationDir = getDirectionFromMouse();
+            Direction = controller.Direction;
             movePlayer(gameTime);
             checkForShoot();
-            setVelocity();
             keepOnScreen();
+            setVelocity();
 
-            updateRotationDir();
+        }
 
-            Debug.WriteLine("Direction: " + Direction);
-            Debug.WriteLine("Rotation Direction: " + rotationDir);
+        public void SetRotation(Vector2 otherpos)
+        {
+            rotationDir = Vector2.Normalize(Position - otherpos);
         }
 
         private bool hasShot;
@@ -102,13 +79,11 @@ namespace RhythmShooter
             addFriction();
         }
 
-        private void updateVelocity()
+        private Vector2 getDirectionFromMouse()
         {
-            if (controller.IsAccelerating)
-            {
-                setVelocity();
-            }
+            return Vector2.Normalize(Position - controller.MousePos);
         }
+
         private void setVelocity()
         {
             if(Direction.X > 0)
@@ -130,7 +105,6 @@ namespace RhythmShooter
         }
         private void addFriction()
         {
-            //Debug.WriteLine(Direction);
             if(Direction.X == 0)
             {
                 if (velocity.X > 0)
