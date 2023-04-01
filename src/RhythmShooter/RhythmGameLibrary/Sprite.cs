@@ -77,69 +77,6 @@ namespace RhythmGameLibrary
             Rect.Height = (int)(spriteTexture.Height * this.scale);
         }
 
-        #region old Attempt at rotation
-        /*private void updateRotation()
-        {
-            if (Direction.X < 0)
-            {
-                setRotationValue(MathHelper.ToRadians(180));
-            }
-            if( Direction.X > 0)
-            {
-                setRotationValue(MathHelper.ToRadians(360));
-            }
-            if(Direction.Y < 0)
-            {
-                setRotationValue(MathHelper.ToRadians(270));
-            }
-            if(Direction.Y > 0)
-            {
-                setRotationValue(MathHelper.ToRadians(90));
-            }
-            
-        }*/
-        float getAngle(float s, float e)
-        {
-            float d = e -s;
-            float dp = d / 360;
-            float n = MathF.Round(dp);
-            float dx = dp - n;
-            d = 360 * dx;
-            return d;
-        }
-        private bool rotateClockwise(float target)
-        {
-            clockwiseDistance = (Rotation - target + 360) % 360;
-            counterclockwiseDistance = (target - Rotation + 360) % 360;
-
-            if (Math.Abs(clockwiseDistance) < Math.Abs(counterclockwiseDistance))
-            {
-                return true;
-            }
-            return false;
-        }
-        float clockwiseDistance;
-        float counterclockwiseDistance;
-
-        private void setRotationValue(float target)
-        {
-            if (rotateClockwise(target))
-            {
-                if (Rotation != Rotation - clockwiseDistance)
-                {
-                    Rotation -= MathHelper.ToRadians(rotationVelocity);
-                }
-            }
-            else
-            {
-                if (Rotation != Rotation - counterclockwiseDistance)
-                {
-                    Rotation += MathHelper.ToRadians(rotationVelocity);
-                }
-            }
-        }
-
-        #endregion
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp,null, null, null, camera.Transform);

@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RhythmShooter
 {
@@ -24,6 +18,11 @@ namespace RhythmShooter
             p1.SetRotation(p2.Position);
             p2.SetRotation(p1.Position);
             base.Update(gameTime);
+        }
+
+        public Vector2 GetEnemyTargetPos()
+        {
+            return p1.Position - p2.Position;
         }
 
     }
