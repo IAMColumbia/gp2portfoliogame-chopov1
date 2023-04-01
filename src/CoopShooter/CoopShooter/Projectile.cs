@@ -18,7 +18,7 @@ namespace RhythmShooter
             collisonTag = CollisionTag.Projectile;
             CollisionManager.instance.AddCollidableObj(this);
             this.spawner = s;
-            speed = 2f;
+            speed = 0.2f;
         }
 
         public override void Update(GameTime gameTime)
@@ -36,7 +36,10 @@ namespace RhythmShooter
             Position += Direction * speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
-
+        public override void OnCollision(CollisionTag otherObj)
+        {
+            base.OnCollision(otherObj);
+        }
         //change this to be rhtyhm based later
         protected bool isOutOfBounds()
         {
