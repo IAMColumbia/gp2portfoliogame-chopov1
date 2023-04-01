@@ -10,8 +10,10 @@ using System.Diagnostics;
 
 namespace RhythmGameLibrary
 {
+    public enum CollisionTag { none, Player, Enemy, Projectile }
     public class Sprite : DrawableGameComponent, ISceneComponenet
     {
+        public CollisionTag collisonTag;
         public Vector2 Position, Direction;
         public Rectangle Rect;
 
@@ -29,6 +31,7 @@ namespace RhythmGameLibrary
         protected Camera camera;
         public Sprite(Game game, string texturename, Camera camera) : base(game)
         {
+            collisonTag = CollisionTag.none;
             this.camera = camera;
             Game.Components.Add(this);
             TextureName = texturename;
@@ -39,9 +42,14 @@ namespace RhythmGameLibrary
             Position = new Vector2(100, 100);
         }
 
+        public virtual void OnCollision(CollisionTag otherObj)
+        {
+            Debug.WriteLine(collisonTag.ToString() + " COLLIDED WITH " + otherObj.ToString());
+        }
+
         public void SetRotation(float rotation)
         {
-            Rotation= rotation;
+            Rotation = rotation;
         }
 
         protected override void LoadContent()
@@ -79,13 +87,13 @@ namespace RhythmGameLibrary
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred,null, SamplerState.PointClamp,null, null, null, camera.Transform);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform);
             spriteBatch.Draw(spriteTexture,
                 new Vector2(Rect.X, Rect.Y),
                 null,
                 Color.White * transparency,
                 Rotation,
-                origin, 
+                origin,
                 scale,
                 effect,
                 0);
@@ -95,14 +103,14 @@ namespace RhythmGameLibrary
 
         public void Load()
         {
-            Enabled= true;
-            Visible= true;
+            Enabled = true;
+            Visible = true;
         }
 
         public void UnLoad()
         {
-            Enabled= false;
-            Visible= false;
+            Enabled = false;
+            Visible = false;
         }
     }
 }

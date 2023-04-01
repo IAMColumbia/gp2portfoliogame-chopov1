@@ -8,7 +8,7 @@ using RhythmGameLibrary;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace RhythmShooter
+namespace RhythmGameLibrary
 {
     public class PlayerController : InputHandler
     {

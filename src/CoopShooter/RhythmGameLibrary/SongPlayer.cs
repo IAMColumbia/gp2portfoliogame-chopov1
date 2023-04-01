@@ -57,6 +57,11 @@ namespace RhythmGameLibrary
 
         public SongPlayer()
         {
+            songplayerSetup();
+        }
+
+        void songplayerSetup()
+        {
             rnd = new Random();
             songs = new List<string>();
             songs.Add("SynthwaveEighteen 73bpm 9.wav");

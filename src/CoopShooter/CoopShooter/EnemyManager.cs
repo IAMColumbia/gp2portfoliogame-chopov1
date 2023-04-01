@@ -16,13 +16,14 @@ namespace RhythmShooter
         {
             enemies= new List<Enemy>();
             this.pm = pm;
-            //Game.Components.Add(this);
+            Game.Components.Add(this);
             createEnemies(c);
         }
 
         private void createEnemies(Camera c)
         {
             Enemy e = new Enemy(Game, this, c);
+            enemies.Add(e);
         }
         public override void Update(GameTime gameTime)
         {

@@ -15,6 +15,8 @@ namespace RhythmShooter
         Spawner spawner;
         public Projectile(Game game, string texturename, Camera camera, Spawner s) : base(game, texturename, camera)
         {
+            collisonTag = CollisionTag.Projectile;
+            CollisionManager.instance.AddCollidableObj(this);
             this.spawner = s;
             speed = 2f;
         }

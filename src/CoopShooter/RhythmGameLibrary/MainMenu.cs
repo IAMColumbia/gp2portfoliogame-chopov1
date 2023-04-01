@@ -19,7 +19,7 @@ namespace RhythmGameLibrary
             camera = new Camera(Game);
             //Sprite test = new Sprite(Game, "Rocket-Sheet", camera);
             AnimatableSprite poop = new AnimatableSprite(Game, "Rocket-Sheet", 4, .4f, camera);
-            rm = new RhythmManager(game);
+            //rm = new RhythmManager(game);
         }
     }
 }

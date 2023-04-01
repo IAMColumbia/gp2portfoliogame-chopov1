@@ -10,8 +10,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RhythmGameLibrary
 {
-
-
     public class InputHandler
     {
         private KeyboardState KeyboardState;
@@ -88,12 +86,13 @@ namespace RhythmGameLibrary
                     if (IsKeyPressed(Keys.S)) { dir += new Vector2(0, 1); }
                     return dir;
             }
-            
+
         }
         public bool IsDirectionDown(string dir, int playerNum)
         {
             stickValue = Thumbstick(playerNum);
-            if (!pressedDir) {
+            if (!pressedDir)
+            {
                 switch (dir)
                 {
                     case "Right":
@@ -145,19 +144,19 @@ namespace RhythmGameLibrary
                     }
                     break;
                 case "Left":
-                    if(stickValue.X <= -.6 && stickValue.X < -1 * Math.Abs(stickValue.Y))
+                    if (stickValue.X <= -.6 && stickValue.X < -1 * Math.Abs(stickValue.Y))
                     {
                         return true;
                     }
                     break;
                 case "Down":
-                    if(stickValue.Y >= .6 && stickValue.Y > Math.Abs(stickValue.X))
+                    if (stickValue.Y >= .6 && stickValue.Y > Math.Abs(stickValue.X))
                     {
                         return true;
                     }
                     break;
                 case "Up":
-                    if(stickValue.Y <= -.6 && stickValue.Y < -1 * Math.Abs(stickValue.X))
+                    if (stickValue.Y <= -.6 && stickValue.Y < -1 * Math.Abs(stickValue.X))
                     {
                         return true;
                     }
