@@ -9,7 +9,7 @@ using RhythmGameLibrary;
 
 namespace RhythmShooter
 {
-    public class Player : AnimatableSprite
+    public class Player : Sprite
     {
         PlayerController controller;
         float acceleration;
@@ -23,7 +23,7 @@ namespace RhythmShooter
 
         Vector2 rotationDir;
 
-        public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, frames, frameTime, camera)
+        public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
             collisonTag = CollisionTag.Player;
             Position= new Vector2(100, 100);
@@ -32,6 +32,11 @@ namespace RhythmShooter
             acceleration = 0.06f;
             friction = 0.02f;
             gun = new ProjectileSpawner(game, this,camera, 3);
+        }
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
         }
 
         protected override void updateRotation()
@@ -43,13 +48,11 @@ namespace RhythmShooter
         {
             base.Update(gameTime);
             controller.Update();
-            //rotationDir = getDirectionFromMouse();
             Direction = controller.Direction;
             movePlayer(gameTime);
             checkForShoot();
             keepOnScreen();
             setVelocity();
-
         }
 
         public void SetRotation(Vector2 otherpos)
