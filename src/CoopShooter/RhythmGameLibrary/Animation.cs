@@ -73,9 +73,9 @@ namespace RhythmGameLibrary
             s.Draw(texture, pos, _sourceRectangles[frame], Color.White , 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 1);
         }
 
-        public void Draw(Vector2 pos, SpriteBatch s, float transparency, float scale, float rotation, Vector2 origin)
+        public void Draw(Vector2 pos, SpriteBatch s, float transparency, float scale, float rotation = 0)
         {
-            s.Draw(texture, pos, _sourceRectangles[frame], Color.White * transparency, rotation, origin, scale, SpriteEffects.None, 1);
+            s.Draw(texture, pos, _sourceRectangles[frame], Color.White * transparency, rotation, Vector2.Zero, scale, SpriteEffects.None, 1);
         }
     }
 }

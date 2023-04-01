@@ -1,11 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RhythmShooter
 {
@@ -17,6 +11,8 @@ namespace RhythmShooter
             Game.Components.Add(this);
             p1 = new Player(game, 0, "TestShip2", 1, 1, camera);
             p2 = new Player(game, 1, "TestShip1", 1, 2, camera);
+            CollisionManager.instance.AddCollidableObj(p1);
+            CollisionManager.instance.AddCollidableObj(p2);
         }
 
         public override void Update(GameTime gameTime)
@@ -24,6 +20,11 @@ namespace RhythmShooter
             p1.SetRotation(p2.Position);
             p2.SetRotation(p1.Position);
             base.Update(gameTime);
+        }
+
+        public Vector2 GetEnemyTargetPos()
+        {
+            return new Vector2((p1.Position.X + p2.Position.X)/2, (p1.Position.Y + p2.Position.Y )/2);
         }
 
     }

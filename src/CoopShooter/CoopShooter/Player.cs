@@ -25,6 +25,8 @@ namespace RhythmShooter
 
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, frames, frameTime, camera)
         {
+            collisonTag = CollisionTag.Player;
+            Position= new Vector2(100, 100);
             controller= new PlayerController(playerNumber);
             maxSpeed= 1.0f;
             acceleration = 0.06f;
@@ -133,10 +135,26 @@ namespace RhythmShooter
         {
             if(Position.X > GraphicsDevice.Viewport.Width || Position.X < 0)
             {
+                if(Position.X < 0)
+                {
+                    Position.X = 1;
+                }
+                else
+                {
+                    Position.X = GraphicsDevice.Viewport.Width - 1;
+                }
                 velocity.X *= -1;
             }
             if(Position.Y > GraphicsDevice.Viewport.Height || Position.Y < 0)
             {
+                if(Position.Y < 0)
+                {
+                    Position.Y = 1;
+                }
+                else
+                {
+                    Position.Y = GraphicsDevice.Viewport.Height - 1;
+                }
                 velocity.Y *= -1;
             }
         }

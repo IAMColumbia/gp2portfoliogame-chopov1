@@ -34,7 +34,7 @@ namespace RhythmGameLibrary
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform);
-            animation.Draw(Position, spriteBatch, transparency, scale, Rotation, origin);
+            animation.Draw(Position, spriteBatch, transparency, scale, Rotation);
             spriteBatch.End();
         }
 

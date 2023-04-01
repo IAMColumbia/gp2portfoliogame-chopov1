@@ -13,6 +13,7 @@ namespace RhythmGameLibrary
 
         public SceneManager(Game game) : base(game)
         {
+
         }
 
         public void ChangeScene(Scene sceneToClose, Scene sceneToLoad)
