@@ -1,1 +1,4 @@
 Release Notes version 2 Vertical Slice
+
+more of a poc
+stupid vs profile and hard drive failure

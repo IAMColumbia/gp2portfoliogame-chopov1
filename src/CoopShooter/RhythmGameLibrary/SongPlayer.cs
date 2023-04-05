@@ -57,7 +57,7 @@ namespace RhythmGameLibrary
 
         public SongPlayer()
         {
-            songplayerSetup();
+            //songplayerSetup();
         }
 
         void songplayerSetup()
