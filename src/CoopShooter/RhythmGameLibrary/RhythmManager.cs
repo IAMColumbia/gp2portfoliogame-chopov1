@@ -33,7 +33,12 @@ namespace RhythmGameLibrary
 
         public RhythmManager(Game game) : base(game)
         {
-            game.Components.Add(this);
+            //setupRM();
+        }
+
+        void setupRM()
+        {
+            Game.Components.Add(this);
             bpm = 90;
             state = SongState.reset;
             songPlayer = new SongPlayer();

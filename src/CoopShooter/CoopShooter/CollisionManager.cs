@@ -16,7 +16,7 @@ namespace RhythmGameLibrary
         {
             collidableObjects= new List<Sprite>();
             instance = this;
-            Game.Components.Add(this);
+            Game.Components.Add(instance);
         }
 
         public void AddCollidableObj(Sprite collidableObj)

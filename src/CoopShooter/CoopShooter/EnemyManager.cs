@@ -18,12 +18,21 @@ namespace RhythmShooter
             this.pm = pm;
             Game.Components.Add(this);
             createEnemies(c);
+            addEnemiesToCollisionManager();
         }
 
         private void createEnemies(Camera c)
         {
             Enemy e = new Enemy(Game, this, c);
             enemies.Add(e);
+        }
+
+        private void addEnemiesToCollisionManager()
+        {
+            foreach(Enemy e in enemies)
+            {
+                CollisionManager.instance.AddCollidableObj(e);
+            }
         }
         public override void Update(GameTime gameTime)
         {
