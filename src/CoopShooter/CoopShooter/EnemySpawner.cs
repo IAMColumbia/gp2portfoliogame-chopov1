@@ -1,24 +1,28 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using RhythmGameLibrary;
+using RhythmShooter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
-    internal class ProjectileSpawner : Spawner
+    public class EnemySpawner : Spawner
     {
-        protected Player player;
-        public ProjectileSpawner(Game game, Player p, Camera c,int numberOfObjects) : base(game, c, numberOfObjects)
+        Camera c;
+        PlayerManager pm;
+        public EnemySpawner(Game game, PlayerManager pm, Camera c, int numberOfObjects) : base(game, c, numberOfObjects)
         {
-            player = p;
+            this.pm = pm;
+            this.c = c;
         }
 
         public override Sprite createSpawnableObject()
         {
-            return new Projectile(Game, "Pellet", camera, this);
+            return new Enemy(Game, this, c, pm);
         }
 
         public override Sprite SpawnObject(Vector2 pos)
@@ -30,8 +34,6 @@ namespace RhythmShooter
                     Sprite objToSpawn = objects.Dequeue();
                     objects.Enqueue(objToSpawn);
                     objToSpawn.Position = pos;
-                    objToSpawn.SetRotation(player.Rotation + MathHelper.ToRadians(90));
-                    objToSpawn.Direction = player.ShootDir;
                     objToSpawn.Enabled = true;
                     objToSpawn.Visible = true;
                     return objToSpawn;
@@ -39,5 +41,7 @@ namespace RhythmShooter
             }
             return null;
         }
+
+      
     }
 }

@@ -16,10 +16,11 @@ namespace RhythmShooter
         Camera camera;
         public MainScene(Game game, SceneManager manager) : base(game, manager)
         {
-            cm = new CollisionManager(game);
             camera = new Camera(game);
+            cm = new CollisionManager(game);
             players = new PlayerManager(game, camera);
             enemies = new EnemyManager(game, players, camera);
+            
         }
     }
 }

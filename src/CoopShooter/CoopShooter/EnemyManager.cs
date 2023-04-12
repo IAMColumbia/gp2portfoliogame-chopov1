@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using CoopShooter;
+using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,42 +12,59 @@ namespace RhythmShooter
 {
     public class EnemyManager : GameComponent
     {
-        PlayerManager pm;
-        List<Enemy> enemies;
+        EnemySpawner spawner;
+        Random random;
+
+        InputHandler inputHandler;
+
         public EnemyManager(Game game, PlayerManager pm, Camera c) : base(game)
         {
-            enemies= new List<Enemy>();
-            this.pm = pm;
+            random = new Random();
+            //Enemy e = new Enemy(Game, spawner, c, pm);
             Game.Components.Add(this);
-            createEnemies(c);
-            addEnemiesToCollisionManager();
+            spawner = new EnemySpawner(Game, pm, c, 20);
+            inputHandler = new InputHandler();
         }
 
-        private void createEnemies(Camera c)
+
+
+        public override void Initialize()
         {
-            Enemy e = new Enemy(Game, this, c);
-            enemies.Add(e);
+            base.Initialize();
+           
         }
 
-        private void addEnemiesToCollisionManager()
-        {
-            foreach(Enemy e in enemies)
-            {
-                CollisionManager.instance.AddCollidableObj(e);
-            }
-        }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            updateEnemies();
+            inputHandler.Update();
+            if (inputHandler.PressedKey(Microsoft.Xna.Framework.Input.Keys.E))
+            {
+                spawner.SpawnObject(getRandomSpawnPos());
+                Debug.WriteLine("Spawned Enemy");
+            }
+
         }
 
-        void updateEnemies()
+        Vector2 spawnPoint;
+        bool toggle;
+        protected Vector2 getRandomSpawnPos()
         {
-            foreach(Enemy e in enemies)
+            if (toggle)
             {
-                e.setTarget(pm.GetEnemyTargetPos());
+                spawnPoint.X = random.Next(Game.GraphicsDevice.Viewport.Width + 10, Game.GraphicsDevice.Viewport.Width + 30);
+                spawnPoint.Y = random.Next(Game.GraphicsDevice.Viewport.Height + 10, Game.GraphicsDevice.Viewport.Height + 30);
+                toggle = false;
             }
+            else
+            {
+                spawnPoint.X = random.Next(-30, 10);
+                spawnPoint.Y = random.Next(-30, 10);
+                toggle = true;
+            }
+
+            return spawnPoint;
         }
+
     }
 }

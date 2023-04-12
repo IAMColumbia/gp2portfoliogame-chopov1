@@ -10,10 +10,9 @@ using System.Diagnostics;
 
 namespace RhythmGameLibrary
 {
-    public enum CollisionTag { none, Player, Enemy, Projectile }
+    
     public class Sprite : DrawableGameComponent, ISceneComponenet
     {
-        public CollisionTag collisonTag;
         public Vector2 Position, Direction;
         public Rectangle Rect;
 
@@ -29,9 +28,12 @@ namespace RhythmGameLibrary
         protected Vector2 origin;
 
         protected Camera camera;
+
+        protected Texture2D spriteMarker;
+        bool showMarkers;
         public Sprite(Game game, string texturename, Camera camera) : base(game)
         {
-            collisonTag = CollisionTag.none;
+            showMarkers = false;
             this.camera = camera;
             Game.Components.Add(this);
             TextureName = texturename;
@@ -39,12 +41,6 @@ namespace RhythmGameLibrary
             Rotation = 0;
             rotationVelocity = 0.1f;
             transparency = 1;
-            Position = new Vector2(100, 100);
-        }
-
-        public virtual void OnCollision(CollisionTag otherObj)
-        {
-            Debug.WriteLine(collisonTag.ToString() + " COLLIDED WITH " + otherObj.ToString());
         }
 
         public void SetRotation(float rotation)
@@ -55,10 +51,13 @@ namespace RhythmGameLibrary
         protected override void LoadContent()
         {
             base.LoadContent();
+            spriteMarker = Game.Content.Load<Texture2D>("SpriteMarker4x4");
             spriteTexture = Game.Content.Load<Texture2D>(TextureName);
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             effect = SpriteEffects.None;
             origin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
+            Rect.Width = (int)(spriteTexture.Width * this.scale);
+            Rect.Height = (int)(spriteTexture.Height * this.scale);
         }
         public override void Update(GameTime gameTime)
         {
@@ -81,15 +80,26 @@ namespace RhythmGameLibrary
         {
             Rect.X = (int)Position.X;
             Rect.Y = (int)Position.Y;
-            Rect.Width = (int)(spriteTexture.Width * this.scale);
-            Rect.Height = (int)(spriteTexture.Height * this.scale);
+           
+        }
+
+        protected void setPosition(float x, float y)
+        {
+            Position = new Vector2(x, y);
+            Rect.X = (int)Position.X;
+            Rect.Y = (int)Position.Y;
         }
 
         public override void Draw(GameTime gameTime)
         {
+            if(camera == null) { Console.WriteLine("Camera is null"); return; }
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform);
+            if (showMarkers)
+            {
+                drawDebugMarkers(spriteBatch);
+            }
             spriteBatch.Draw(spriteTexture,
-                new Vector2(Rect.X, Rect.Y),
+                new Vector2(Rect.X + spriteTexture.Width, Rect.Y + spriteTexture.Height),
                 null,
                 Color.White * transparency,
                 Rotation,
@@ -99,6 +109,15 @@ namespace RhythmGameLibrary
                 0);
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        void drawDebugMarkers(SpriteBatch sb)
+        {
+            sb.Draw(spriteMarker, new Vector2(Rect.Left, Rect.Top), Color.White);
+            sb.Draw(spriteMarker, new Vector2(Rect.Right,Rect.Top), Color.White);
+            sb.Draw(spriteMarker, new Vector2(Rect.Left, Rect.Bottom), Color.White);
+            sb.Draw(spriteMarker, new Vector2(Rect.Right, Rect.Bottom), Color.White);
+
         }
 
         public void Load()
