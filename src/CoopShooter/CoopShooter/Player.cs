@@ -4,17 +4,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoopShooter;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using RhythmGameLibrary;
 
 namespace RhythmShooter
 {
-    public class Player : Sprite
+    public class Player : CollidableSprite
     {
         PlayerController controller;
         float acceleration;
         float friction;
-        Vector2 velocity;
+        
         float maxSpeed;
 
         ProjectileSpawner gun;
@@ -23,9 +25,12 @@ namespace RhythmShooter
 
         Vector2 rotationDir;
 
+        Texture2D deadTexture;
+        Texture2D liveTexture;
+
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
-            collisonTag = CollisionTag.Player;
+            colInfo.tag = CollisionTag.Player;
             Position= new Vector2(100, 100);
             controller= new PlayerController(playerNumber);
             maxSpeed= 1.0f;
@@ -37,6 +42,8 @@ namespace RhythmShooter
         protected override void LoadContent()
         {
             base.LoadContent();
+            deadTexture = Game.Content.Load<Texture2D>("TestPlayerDead");
+            liveTexture = spriteTexture;
         }
 
         protected override void updateRotation()
@@ -53,6 +60,97 @@ namespace RhythmShooter
             checkForShoot();
             keepOnScreen();
             setVelocity();
+        }
+
+        bool collidingWithPlayer;
+        protected override void onCollision(CollisionObj obj)
+        {
+            base.onCollision(obj);
+            switch (obj.tag)
+            {
+                case CollisionTag.Player:
+                    collideWithSimilarType(obj);
+                    break;
+                case CollisionTag.Enemy:
+                    if(spriteTexture != deadTexture)
+                    {
+                        spriteTexture = deadTexture;
+                    }
+                    break;
+                case CollisionTag.none:
+                    collidingWithPlayer = false;
+                    break;
+            }
+        }
+
+        Rectangle intersection;
+        Rectangle otherRect;
+        void collideWithSimilarType(CollisionObj obj)
+        {
+            otherRect = CollisionManager.instance.GetCollidable(obj.id).GetRect();
+            intersection = CollisionManager.instance.Intersection(colInfo.id, obj.id);
+            if (Math.Abs(intersection.Width) < Math.Abs(intersection.Height))
+            {
+                if(Rect.Right > otherRect.Right)
+                {
+                    Position.X += intersection.Width + 1;
+                }
+                else
+                {
+                    Position.X -= intersection.Width + 1;
+                }
+                
+            }
+            else
+            {
+                if (Rect.Top > otherRect.Top)
+                {
+                    Position.Y += intersection.Height+ 1;
+                }
+                else
+                {
+                    Position.Y -= intersection.Height + 1;
+                }
+            }
+
+            if (!collidingWithPlayer)
+            {
+                collidingWithPlayer = true;
+                velocity *= -1;
+            }
+
+        }
+        Vector2 otherVel;
+        protected override void onCollisionEnd(CollisionObj obj)
+        {
+            base.onCollisionEnd(obj);
+            switch (obj.tag)
+            {
+                case CollisionTag.Enemy:
+                    spriteTexture = liveTexture;
+                    break;
+                case CollisionTag.Player:
+                    //need to handle velocity zero case in collisionEnd becuase the order in which the velocity is flipped affects the direction in which the ship is launched. (toward or away from the other ship) this way we only launch the ships away from eachother becuase we get abs value and we know for sure the other player flipped its velocity already.
+                    /*if (collidingWithPlayer)
+                    {
+                        if (velocity == Vector2.Zero)
+                        {
+                            otherVel = CollisionManager.instance.GetCollidable(obj.id).GetVelocity() / 2;
+                            velocity = new Vector2(Math.Abs(otherVel.X), Math.Abs(otherVel.Y));
+                            if (otherVel.X > 0)
+                            {
+                                velocity.X *= -1;
+                            }
+                            if (otherVel.Y > 0)
+                            {
+                                velocity.Y *= -1;
+                            }
+                        }
+                    }*/
+                    collidingWithPlayer = false;
+                    break;
+
+            }
         }
 
         public void SetRotation(Vector2 otherpos)
@@ -136,27 +234,27 @@ namespace RhythmShooter
 
         private void keepOnScreen()
         {
-            if(Position.X > GraphicsDevice.Viewport.Width || Position.X < 0)
+            if(Rect.Left + Rect.Width > GraphicsDevice.Viewport.Width || Rect.Left < 0)
             {
-                if(Position.X < 0)
+                if(Rect.Left < 0)
                 {
                     Position.X = 1;
                 }
                 else
                 {
-                    Position.X = GraphicsDevice.Viewport.Width - 1;
+                    Position.X = GraphicsDevice.Viewport.Width - 1 - Rect.Width;
                 }
                 velocity.X *= -1;
             }
-            if(Position.Y > GraphicsDevice.Viewport.Height || Position.Y < 0)
+            if(Rect.Top + Rect.Height > GraphicsDevice.Viewport.Height || Rect.Top < 0)
             {
-                if(Position.Y < 0)
+                if(Rect.Top < 0)
                 {
                     Position.Y = 1;
                 }
                 else
                 {
-                    Position.Y = GraphicsDevice.Viewport.Height - 1;
+                    Position.Y = GraphicsDevice.Viewport.Height - 1 - Rect.Height;
                 }
                 velocity.Y *= -1;
             }

@@ -11,8 +11,6 @@ namespace RhythmShooter
 {
     public class Spawner : GameComponent
     {
-        protected Player player;
-      
         protected Random rnd;
         protected int numOfObjects;
         public int NumberOfObjects { get { return objects.Count; } }
@@ -20,14 +18,13 @@ namespace RhythmShooter
 
         protected Queue<Sprite> objects;
         List<Sprite> activeObjs;
-        public Spawner(Game game, Player p, Camera c, int numberOfObjects) : base(game)
+        public Spawner(Game game, Camera c, int numberOfObjects) : base(game)
         {
             Game.Components.Add(this);
-            camera= c;
+            numOfObjects = numberOfObjects;
+            camera = c;
             activeObjs = new List<Sprite>();
             objects = new Queue<Sprite>();
-            player = p;
-            numOfObjects = numberOfObjects;
             rnd = new Random();
         }
 
@@ -36,6 +33,7 @@ namespace RhythmShooter
             base.Initialize();
             objects = createObjects(numOfObjects);
         }
+
 
         public virtual Sprite createSpawnableObject()
         {
