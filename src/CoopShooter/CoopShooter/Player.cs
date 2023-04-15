@@ -28,6 +28,9 @@ namespace RhythmShooter
         Texture2D deadTexture;
         Texture2D liveTexture;
 
+        public int Kills;
+
+
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
             colInfo.tag = CollisionTag.Player;
@@ -39,11 +42,23 @@ namespace RhythmShooter
             gun = new ProjectileSpawner(game, this,camera, 3);
         }
 
+        public void ResetPlayer(Vector2 startPos)
+        {
+            gun.ResetObjects();
+            Kills = 0;
+            state = SpriteState.alive;
+        }
+
         protected override void LoadContent()
         {
             base.LoadContent();
             deadTexture = Game.Content.Load<Texture2D>("TestPlayerDead");
             liveTexture = spriteTexture;
+        }
+
+        public void AddScore()
+        {
+            Kills++;
         }
 
         protected override void updateRotation()
@@ -62,6 +77,24 @@ namespace RhythmShooter
             setVelocity();
         }
 
+        protected override void StateBasedUpdate()
+        {
+            switch (state) {
+                case SpriteState.alive:
+                    if(spriteTexture != liveTexture)
+                    {
+                        spriteTexture = liveTexture;
+                    }
+                    break;
+                case SpriteState.dead:
+                    if (spriteTexture != deadTexture)
+                    {
+                        spriteTexture = deadTexture;
+                    }
+                    break;
+            }
+        }
+
         bool collidingWithPlayer;
         protected override void onCollision(CollisionObj obj)
         {
@@ -72,10 +105,8 @@ namespace RhythmShooter
                     collideWithSimilarType(obj);
                     break;
                 case CollisionTag.Enemy:
-                    if(spriteTexture != deadTexture)
-                    {
-                        spriteTexture = deadTexture;
-                    }
+                    state = SpriteState.dead;
+                    
                     break;
                 case CollisionTag.none:
                     collidingWithPlayer = false;

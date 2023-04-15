@@ -37,6 +37,7 @@ namespace RhythmShooter
             base.Update(gameTime);
             setDirection();
 
+
             moveEnemy(gameTime);
             setTarget(pm.GetEnemyTargetPos());
         }
@@ -59,13 +60,16 @@ namespace RhythmShooter
 
         public void moveEnemy(GameTime gameTime)
         {
-            Position += Direction * speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            Position += velocity* speed * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             //Position = target;
         }
 
         void setDirection()
         {
-            Direction = target - Position;
+            if (!isOverlappingSameType())
+            {
+                velocity = target - Position;
+            }
         }
 
     }

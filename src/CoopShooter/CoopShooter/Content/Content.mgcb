@@ -37,6 +37,13 @@
 /processorParam:TextureFormat=Color
 /build:Pellet.png
 
+#begin ScoreFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:ScoreFont.spritefont
+
 #begin SpriteMarker4x4.png
 /importer:TextureImporter
 /processor:TextureProcessor

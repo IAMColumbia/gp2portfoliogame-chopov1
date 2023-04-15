@@ -106,7 +106,7 @@ namespace RhythmGameLibrary
                     }
                     if(ObjA.getObjInfo().tag == ObjB.getObjInfo().tag)
                     {
-                        
+                        KeepSimilarObjsFromOverlap(ObjA, ObjB);
                     }
                     if (ObjectsCollide(ObjA.GetRect(), ObjB.GetRect()))
                     {

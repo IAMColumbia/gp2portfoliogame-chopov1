@@ -39,6 +39,7 @@ namespace RhythmShooter
             switch (obj.tag)
             {
                 case CollisionTag.Enemy:
+                    ((ProjectileSpawner)spawner).DestroyedEnemy();
                     spawner.DeSpawn(this);
                     break;
             }

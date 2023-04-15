@@ -16,6 +16,11 @@ namespace RhythmShooter
             player = p;
         }
 
+        public void DestroyedEnemy()
+        {
+            player.AddScore();
+        }
+
         public override Sprite createSpawnableObject()
         {
             return new Projectile(Game, "Pellet", camera, this);

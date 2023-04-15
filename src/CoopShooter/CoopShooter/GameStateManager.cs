@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace RhythmShooter
 {
+    public enum GameState { playing, dead, reset, menu}
     public class GameStateManager : GameComponent
     {
+        public GameState GameState;
         mySceneManager sceneManager;
         public GameStateManager(Game game) : base(game)
         {

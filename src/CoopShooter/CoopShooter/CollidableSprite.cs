@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace CoopShooter
 {
+    public enum SpriteState { alive, dead, inactive}
     public class CollidableSprite : Sprite, ICollidable
     {
+        public SpriteState state { get; protected set; }
         protected CollisionState collisionState;
         protected CollisionObj colInfo;
         protected Vector2 velocity;
@@ -26,12 +28,29 @@ namespace CoopShooter
             CollisionManager.instance.AddCollidableObj(this);
         }
 
+        protected virtual void StateBasedUpdate()
+        {
+
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             removePreviousOverlaps();
+            StateBasedUpdate();
         }
 
+        protected bool isOverlappingSameType()
+        {
+            foreach (CollisionObj collisionObj in currentOverlaps)
+            {
+                if(collisionObj.tag == colInfo.tag)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         void removePreviousOverlaps()
         {

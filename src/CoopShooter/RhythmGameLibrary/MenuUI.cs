@@ -12,7 +12,9 @@ namespace RhythmGameLibrary
     {
     
         protected SpriteFont BasicFont;
+        protected SpriteFont ScoreFont;
         protected SpriteBatch spriteBatch;
+        
 
         protected int Xcenter;
         protected int Ycenter;
@@ -28,6 +30,7 @@ namespace RhythmGameLibrary
             Ycenter = GraphicsDevice.Viewport.Height / 2;
             base.LoadContent();
             BasicFont = Game.Content.Load<SpriteFont>("BasicFont");
+            ScoreFont = Game.Content.Load<SpriteFont>("ScoreFont");
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
         }
 

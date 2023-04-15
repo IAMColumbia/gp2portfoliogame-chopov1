@@ -26,7 +26,11 @@ namespace RhythmShooter
             inputHandler = new InputHandler();
         }
 
-
+        //maybe make a manager state enum cuz this could work for playermanager to
+        public void ResetEnemies()
+        {
+            spawner.ResetObjects();
+        }
 
         public override void Initialize()
         {
