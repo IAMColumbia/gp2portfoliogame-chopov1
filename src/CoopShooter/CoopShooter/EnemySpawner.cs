@@ -36,6 +36,8 @@ namespace CoopShooter
                     objToSpawn.Position = pos;
                     objToSpawn.Enabled = true;
                     objToSpawn.Visible = true;
+                    ((Enemy)objToSpawn).setTarget(pm.GetEnemyTargetPos());
+                    objToSpawn.State = SpriteState.alive; 
                     return objToSpawn;
                 }
             }

@@ -1,23 +1,23 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using RhythmGameLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RhythmGameLibrary;
 
-namespace RhythmGameLibrary
+namespace CoopShooter
 {
-    public class AnimatableSprite : Sprite
+    public class AnimatableSprite : CollidableSprite
     {
         Animation animation;
         int frames;
         float frameTime;
-        public AnimatableSprite(Game game, string texturename, int frames,float frameTime,Camera camera) : base(game, texturename, camera)
+        public AnimatableSprite(Game game, string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
-           this.frames= frames;
-            this.frameTime= frameTime;
+            this.frames = frames;
+            this.frameTime = frameTime;
         }
 
         protected override void LoadContent()

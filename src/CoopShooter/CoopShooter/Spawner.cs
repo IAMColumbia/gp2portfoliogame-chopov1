@@ -89,6 +89,8 @@ namespace RhythmShooter
 
         public virtual void DeSpawn(Sprite s)
         {
+            //magic number, put a varibale for a location to store objects.
+            s.Position = new Vector2(-800, -800);
             s.Enabled = false;
             s.Visible = false;
         }

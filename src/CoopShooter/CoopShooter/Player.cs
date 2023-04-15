@@ -46,7 +46,7 @@ namespace RhythmShooter
         {
             gun.ResetObjects();
             Kills = 0;
-            state = SpriteState.alive;
+            State = SpriteState.alive;
         }
 
         protected override void LoadContent()
@@ -79,7 +79,7 @@ namespace RhythmShooter
 
         protected override void StateBasedUpdate()
         {
-            switch (state) {
+            switch (State) {
                 case SpriteState.alive:
                     if(spriteTexture != liveTexture)
                     {
@@ -105,7 +105,7 @@ namespace RhythmShooter
                     collideWithSimilarType(obj);
                     break;
                 case CollisionTag.Enemy:
-                    state = SpriteState.dead;
+                    State = SpriteState.dead;
                     
                     break;
                 case CollisionTag.none:

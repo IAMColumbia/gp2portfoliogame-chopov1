@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Timers;
 
 namespace RhythmShooter
 {
@@ -17,6 +17,8 @@ namespace RhythmShooter
 
         InputHandler inputHandler;
 
+        Timer spawnTimer;
+
         public EnemyManager(Game game, PlayerManager pm, Camera c) : base(game)
         {
             random = new Random();
@@ -24,49 +26,85 @@ namespace RhythmShooter
             Game.Components.Add(this);
             spawner = new EnemySpawner(Game, pm, c, 20);
             inputHandler = new InputHandler();
+            spawnTimer = new Timer(500);
+            spawnTimer.AutoReset = true;
+            spawnTimer.Elapsed += SpawnEnemy;
+        }
+
+
+        public void SpawnEnemy(Object source, ElapsedEventArgs e)
+        {
+            int spawn = random.Next(0, 12);
+            switch (spawn)
+            {
+                default:
+                    break;
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    spawner.SpawnObject(getRandomSpawnPos());
+                    Debug.WriteLine("Spawned Enemy");
+                    break;
+            }
         }
 
         //maybe make a manager state enum cuz this could work for playermanager to
         public void ResetEnemies()
         {
+            
             spawner.ResetObjects();
         }
 
         public override void Initialize()
         {
             base.Initialize();
-           
+           spawnTimer.Start();
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            inputHandler.Update();
+            //old code to test enemies
+            /*inputHandler.Update();
             if (inputHandler.PressedKey(Microsoft.Xna.Framework.Input.Keys.E))
             {
                 spawner.SpawnObject(getRandomSpawnPos());
                 Debug.WriteLine("Spawned Enemy");
-            }
+            }*/
 
         }
 
         Vector2 spawnPoint;
-        bool toggle;
         protected Vector2 getRandomSpawnPos()
         {
-            if (toggle)
+            int side = random.Next(0, 4);
+            switch (side)
             {
-                spawnPoint.X = random.Next(Game.GraphicsDevice.Viewport.Width + 10, Game.GraphicsDevice.Viewport.Width + 30);
-                spawnPoint.Y = random.Next(Game.GraphicsDevice.Viewport.Height + 10, Game.GraphicsDevice.Viewport.Height + 30);
-                toggle = false;
+                case 0:
+                    //right of screen
+                    spawnPoint.X = random.Next(Game.GraphicsDevice.Viewport.Width + 10, Game.GraphicsDevice.Viewport.Width + 30);
+                    spawnPoint.Y = random.Next(0, Game.GraphicsDevice.Viewport.Height);
+                    break;
+                case 1:
+                    //left
+                    spawnPoint.X = random.Next(-30, 0);
+                    spawnPoint.Y = random.Next(0, Game.GraphicsDevice.Viewport.Height);
+                    break;
+                case 2:
+                    //bottom
+                    spawnPoint.X = random.Next(0, Game.GraphicsDevice.Viewport.Width);
+                    spawnPoint.Y = random.Next(Game.GraphicsDevice.Viewport.Height + 10, Game.GraphicsDevice.Viewport.Height + 30);
+                    break;
+                case 3:
+                    //top
+                    spawnPoint.X = random.Next(0, Game.GraphicsDevice.Viewport.Width);
+                    spawnPoint.Y = random.Next(-30, 0);
+                    break;
             }
-            else
-            {
-                spawnPoint.X = random.Next(-30, 10);
-                spawnPoint.Y = random.Next(-30, 10);
-                toggle = true;
-            }
-
+           
             return spawnPoint;
         }
 

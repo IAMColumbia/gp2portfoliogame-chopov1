@@ -8,18 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoopShooter
+namespace RhythmGameLibrary
 {
-    public enum SpriteState { alive, dead, inactive}
     public class CollidableSprite : Sprite, ICollidable
     {
-        public SpriteState state { get; protected set; }
+        
         protected CollisionState collisionState;
         protected CollisionObj colInfo;
         protected Vector2 velocity;
         protected List<CollisionObj> currentOverlaps;
         List<CollisionObj> overlapsToRemove;
-        Dictionary<int, bool> isOverlapping = new Dictionary<int, bool>();
         public CollidableSprite(Game game, string texturename, Camera camera) : base(game, texturename, camera)
         {
             currentOverlaps = new List<CollisionObj>();

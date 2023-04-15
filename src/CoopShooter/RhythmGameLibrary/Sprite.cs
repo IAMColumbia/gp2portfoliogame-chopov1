@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Xml;
 
 namespace RhythmGameLibrary
 {
-    
+    public enum SpriteState { alive, dead, inactive }
+
     public class Sprite : DrawableGameComponent, ISceneComponenet
     {
+        public SpriteState State { get; set; }
+
         public Vector2 Position, Direction;
         public Rectangle Rect;
 

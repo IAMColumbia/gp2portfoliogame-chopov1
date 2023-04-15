@@ -16,8 +16,8 @@ namespace RhythmShooter
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            _graphics.PreferredBackBufferWidth = 1920/2;
-            _graphics.PreferredBackBufferHeight = 1080/2;
+            _graphics.PreferredBackBufferWidth = 1920;
+            _graphics.PreferredBackBufferHeight = 1080;
             _graphics.ApplyChanges();
 
             gameStateManager = new GameStateManager(this);

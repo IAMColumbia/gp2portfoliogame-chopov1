@@ -11,7 +11,7 @@ namespace RhythmShooter
         Player p2;
         public int TotalKills { get { return p1.Kills + p2.Kills; } }
 
-        public bool ResetGame { get { return p1.state == CoopShooter.SpriteState.dead || p2.state == CoopShooter.SpriteState.dead; } set { } }
+        public bool ResetGame { get { return p1.State == SpriteState.dead || p2.State == SpriteState.dead; } set { } }
         public PlayerManager(Game game, Camera camera) : base(game) {
             Game.Components.Add(this);
             p1 = new Player(game, 0, "TestShip2", 1, 1, camera);
