@@ -21,7 +21,7 @@ namespace RhythmGameLibrary
         public Rectangle Rect;
 
         protected SpriteBatch spriteBatch;
-        SpriteEffects effect;
+        protected SpriteEffects effect;
 
         protected Texture2D spriteTexture;
         public string TextureName;
@@ -34,7 +34,7 @@ namespace RhythmGameLibrary
         protected Camera camera;
 
         protected Texture2D spriteMarker;
-        bool showMarkers;
+        protected bool showMarkers;
         public Sprite(Game game, string texturename, Camera camera) : base(game)
         {
             showMarkers = false;
@@ -115,7 +115,7 @@ namespace RhythmGameLibrary
             base.Draw(gameTime);
         }
 
-        void drawDebugMarkers(SpriteBatch sb)
+        protected void drawDebugMarkers(SpriteBatch sb)
         {
             sb.Draw(spriteMarker, new Vector2(Rect.Left, Rect.Top), Color.White);
             sb.Draw(spriteMarker, new Vector2(Rect.Right,Rect.Top), Color.White);

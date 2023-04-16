@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace RhythmGameLibrary
 {
@@ -19,10 +20,8 @@ namespace RhythmGameLibrary
         float frameTime;
         float frameTimeLeft;
         bool active = true;
-
         public Animation(Texture2D spriteSheet, int framesX, float frameTime) 
         {
-     
             _sourceRectangles = new List<Rectangle>();
             texture= spriteSheet;
             frames = framesX;
@@ -68,14 +67,17 @@ namespace RhythmGameLibrary
             }
         }
 
-        public void Draw(Vector2 pos, SpriteBatch s)
+        public void Draw(Vector2 pos, SpriteBatch s, Rectangle Rect)
         {
             s.Draw(texture, pos, _sourceRectangles[frame], Color.White , 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 1);
+            
         }
 
-        public void Draw(Vector2 pos, SpriteBatch s, float transparency, float scale, float rotation = 0)
+        public void Draw(Vector2 pos, SpriteBatch s, float transparency, float scale, float rotation, Vector2 origin)
         {
-            s.Draw(texture, pos, _sourceRectangles[frame], Color.White * transparency, rotation, Vector2.Zero, scale, SpriteEffects.None, 1);
+            s.Draw(texture, pos, _sourceRectangles[frame], Color.White * transparency, rotation, origin, scale, SpriteEffects.None, 1);
         }
+
+
     }
 }
