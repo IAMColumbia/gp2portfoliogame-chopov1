@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
     public enum GameState { playing, dead, reset, menu}
     public class GameStateManager : GameComponent

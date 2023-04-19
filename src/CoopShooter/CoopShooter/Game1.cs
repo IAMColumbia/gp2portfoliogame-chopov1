@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
     public class Game1 : Game
     {

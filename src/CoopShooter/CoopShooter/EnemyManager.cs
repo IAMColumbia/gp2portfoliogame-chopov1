@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
     public class EnemyManager : GameComponent
     {
-        EnemySpawner spawner;
+        public EnemySpawner spawner { get; private set; }
         Random random;
 
         InputHandler inputHandler;

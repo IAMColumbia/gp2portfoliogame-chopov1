@@ -7,24 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
     public class MainScene : Scene
     {
         CollisionManager cm;
-        PlayerManager players;
+        public PlayerManager playerManager { get; private set; }
         EnemyManager enemies;
         Camera camera;
-
         GameplayUI gameplayUI;
-        public MainScene(Game game, SceneManager manager) : base(game, manager)
+
+        new mySceneManager sceneManager;
+        public MainScene(Game game, mySceneManager manager) : base(game, manager)
         {
+            sceneManager = manager;
             Game.Components.Add(this);
             camera = new Camera(game);
             cm = new CollisionManager(game);
-            players = new PlayerManager(game, camera);
-            enemies = new EnemyManager(game, players, camera);
-            gameplayUI = new GameplayUI(game, players);
+            playerManager = new PlayerManager(game, camera);
+            enemies = new EnemyManager(game, playerManager, camera);
+            gameplayUI = new GameplayUI(game, playerManager);
+            addCompsToScene();
+        }
+
+        void addCompsToScene()
+        {
+            addComponentToScene(camera);
+            addComponentToScene(playerManager.p1);
+            addComponentToScene(playerManager.p2);
+
         }
 
         public override void Initialize()
@@ -36,12 +47,21 @@ namespace RhythmShooter
         protected override void SceneUpdate()
         {
             base.SceneUpdate();
-            if (players.ResetGame)
+            if (playerManager.ResetGame)
             {
                 enemies.ResetEnemies();
-                players.ResetPlayers();
-                players.ResetGame = false;
+                playerManager.ResetPlayers();
+                playerManager.ResetGame = false;
             }
+            if (sceneManager.sceneInput.ReleasedKey(Microsoft.Xna.Framework.Input.Keys.B))
+            {
+                OpenShop();
+            }
+        }
+
+        private void OpenShop()
+        {
+            sceneManager.ChangeScene(((mySceneManager)sceneManager).gamePlay, ((mySceneManager)sceneManager).shop);
         }
     }
 }

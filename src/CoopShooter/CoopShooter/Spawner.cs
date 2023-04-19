@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
     public class Spawner : GameComponent
     {
@@ -17,13 +17,13 @@ namespace RhythmShooter
         protected Camera camera;
 
         protected Queue<Sprite> objects;
-        List<Sprite> activeObjs;
+        public List<Sprite> ActiveObjs { get; protected set; }
         public Spawner(Game game, Camera c, int numberOfObjects) : base(game)
         {
             Game.Components.Add(this);
             numOfObjects = numberOfObjects;
             camera = c;
-            activeObjs = new List<Sprite>();
+            ActiveObjs = new List<Sprite>();
             objects = new Queue<Sprite>();
             rnd = new Random();
         }
@@ -98,15 +98,15 @@ namespace RhythmShooter
 
         public List<Sprite> getActiveObjs()
         {
-            activeObjs.Clear();
+            ActiveObjs.Clear();
             foreach (Sprite s in objects)
             {
                 if (s.Enabled)
                 {
-                    activeObjs.Add(s);
+                    ActiveObjs.Add(s);
                 }
             }
-            return activeObjs;
+            return ActiveObjs;
         }
     }
 }

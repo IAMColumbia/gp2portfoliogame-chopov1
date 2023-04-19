@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RhythmGameLibrary;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
     public class Player : CollidableSprite
     {
@@ -19,7 +19,7 @@ namespace RhythmShooter
         
         float maxSpeed;
 
-        ProjectileSpawner gun;
+        ProjectileDecorator gun;
 
         public Vector2 ShootDir;
 
@@ -30,21 +30,40 @@ namespace RhythmShooter
 
         public int Kills;
 
+        List<ProjectileDecorator> guns;
+
+        public Camera camera;
 
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
+            this.camera = camera;
+            guns = new List<ProjectileDecorator>();
             colInfo.tag = CollisionTag.Player;
             Position= new Vector2(100, 100);
             controller= new PlayerController(playerNumber);
             maxSpeed= 1.0f;
             acceleration = 0.06f;
             friction = 0.02f;
-            gun = new ProjectileSpawner(game, this,camera, 3);
+            gun = new ProjectileDecorator(game, this,camera, 3, 0);
+            guns.Add(gun);
+        }
+
+        void ResetGuns()
+        {
+            foreach(ProjectileDecorator gun in guns)
+            {
+                gun.Reset();
+            }
+        }
+
+        public Vector2 GetShootMod()
+        {
+            return new Vector2(guns.Count, guns.Count);
         }
 
         public void ResetPlayer(Vector2 startPos)
         {
-            gun.ResetObjects();
+            ResetGuns();
             Kills = 0;
             State = SpriteState.alive;
         }
@@ -189,6 +208,19 @@ namespace RhythmShooter
             rotationDir = Vector2.Normalize(Position - otherpos);
         }
 
+        public void AddProjectileDecorator(ProjectileDecorator pd)
+        {
+            guns.Add(pd);
+        }
+
+        void shootProjectiles()
+        {
+            foreach(var gun in guns)
+            {
+                gun.Shoot(this.Position);
+            }
+        }
+
         private bool hasShot;
         private void checkForShoot()
         {
@@ -197,7 +229,7 @@ namespace RhythmShooter
             {
                 if (!hasShot)
                 {
-                    gun.SpawnObject(this.Position);
+                    shootProjectiles();
                     hasShot = true;
                 }
             }

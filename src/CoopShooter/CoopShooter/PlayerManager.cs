@@ -3,12 +3,12 @@ using RhythmGameLibrary;
 using System.Diagnostics;
 using System.Net.Http.Headers;
 
-namespace RhythmShooter
+namespace CoopShooter
 {
     public class PlayerManager : GameComponent
     {
-        Player p1;
-        Player p2;
+        public Player p1 { get; protected set; }
+        public Player p2 { get; protected set; }
         public int TotalKills { get { return p1.Kills + p2.Kills; } }
 
         public bool ResetGame { get { return p1.State == SpriteState.dead || p2.State == SpriteState.dead; } set { } }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RhythmGameLibrary;
-using RhythmShooter;
+using CoopShooter;
 using System;
 using System.Collections.Generic;
 using System.Linq;

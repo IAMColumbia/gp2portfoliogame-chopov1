@@ -1,3 +1,3 @@
 ﻿
-using var game = new RhythmShooter.Game1();
+using var game = new CoopShooter.Game1();
 game.Run();
