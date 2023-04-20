@@ -14,13 +14,17 @@ namespace CoopShooter
         public Scene Gameplay;
         public Scene GameOver;
         public Scene PauseMenu;
-        public InputHandler sceneInput;
+        public MenuController sceneInput;
         public mySceneManager(Game game) : base(game)
         {
             Game.Components.Add(this);
-            sceneInput = new InputHandler();
-            MainMenu = new 
+            sceneInput = new MenuController();
+            MainMenu = new MainMenu(game, this);
             Gameplay = new GameplayScene(game, this);
+            PauseMenu = new PauseScene(game, this);
+            GameOver = new GameOverScene(game, this);
+            
+            MainMenu.State = SceneState.loading;
         }
 
         public override void Update(GameTime gameTime)

@@ -10,14 +10,23 @@ namespace CoopShooter
 {
     public class MainMenu : Scene
     {
+        MenuController inputHandler;
+        MenuUI ui;
         public MainMenu(Game game, SceneManager manager) : base(game, manager)
         {
-
+            inputHandler = new MenuController();
+            ui = new MainMenuUI(game);
+            addComponentToScene(ui);
         }
 
         public override void Update(GameTime gameTime)
         {
+            inputHandler.Update();
             base.Update(gameTime);
+            if (inputHandler.PressedContinue)
+            {
+                sceneManager.ChangeScene(this, ((mySceneManager)sceneManager).Gameplay);
+            }
         }
     }
 }

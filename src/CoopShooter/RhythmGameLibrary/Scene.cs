@@ -17,6 +17,7 @@ namespace RhythmGameLibrary
         public SceneState State;
         public Scene(Game game, SceneManager manager) :base(game)
         {
+            Game.Components.Add(this);
             sceneManager = manager;
             sceneComponents = new List<ISceneComponenet>();
         }

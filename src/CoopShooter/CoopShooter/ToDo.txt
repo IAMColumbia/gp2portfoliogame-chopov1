@@ -1,8 +1,14 @@
 ﻿
 
 Add More PowerUps
-Add Timer Reload Timer To Guns
 Add Range to Guns - maybe by checking distance from player and despawning if to far
+Players need to bounce off eachother
+
+power up ideas
+maybe a projectile that multiplies when it hits enemy
+sine wave
+orbit shield thing that activates for a bit
+shield so when you get hit you dont die but you do lose the shield
 
 Add score manager - prolly singleton again
 add start screen and game over scene

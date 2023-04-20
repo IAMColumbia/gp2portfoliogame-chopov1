@@ -10,7 +10,7 @@ using System.Timers;
 
 namespace CoopShooter
 {
-    public class MovingSpriteManager : GameComponent
+    public class MovingSpriteManager : GameComponent, ISceneComponenet
     {
         public MovingSpriteManager(Game game, Camera c, PlayerManager pm, int spawnRate) : base(game)
         {
@@ -77,6 +77,22 @@ namespace CoopShooter
             }
 
             return spawnPoint;
+        }
+
+        public void Load()
+        {
+            //load spawner stuff
+            spawner.Load();
+            Enabled = true;
+            spawnTimer.Start();
+        }
+
+        public void UnLoad()
+        {
+            //unload spawner stuff
+            Enabled = false;
+            spawnTimer.Stop();
+            spawner.UnLoad();
         }
     }
 }

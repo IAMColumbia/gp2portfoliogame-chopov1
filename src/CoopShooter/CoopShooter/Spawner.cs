@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace CoopShooter
 {
-    public class Spawner : GameComponent
+    public class Spawner : GameComponent, ISceneComponenet
     {
         protected Random rnd;
         protected int numOfObjects;
@@ -107,6 +107,24 @@ namespace CoopShooter
                 }
             }
             return ActiveObjs;
+        }
+
+        public void Load()
+        {
+            foreach(Sprite s in objects)
+            {
+                s.Load();
+            }
+            Enabled = true;
+        }
+
+        public void UnLoad()
+        {
+            foreach (Sprite s in objects)
+            {
+                s.UnLoad();
+            } 
+            Enabled = false;
         }
     }
 }

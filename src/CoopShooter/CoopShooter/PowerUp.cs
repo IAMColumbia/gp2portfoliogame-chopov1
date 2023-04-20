@@ -13,7 +13,7 @@ namespace CoopShooter
     {
         public PowerUp(Game game, Spawner s, Camera camera, PlayerManager pm) : base(game, new AnimationData("Laser", 1, 1), camera, s, pm)
         {
-
+            minSpeed = 8; maxSpeed = 15;
         }
 
         protected override void onCollision(CollisionObj obj)

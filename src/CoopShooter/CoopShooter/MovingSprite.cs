@@ -12,7 +12,7 @@ namespace CoopShooter
     {
         int health;
         float speed;
-        int minSpeed, maxSpeed;
+        protected int minSpeed, maxSpeed;
         Vector2 target;
         Spawner spawner;
         PlayerManager pm;

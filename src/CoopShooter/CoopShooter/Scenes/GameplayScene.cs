@@ -16,45 +16,49 @@ namespace CoopShooter
         EnemyManager enemies;
         Camera camera;
         GameplayUI gameplayUI;
-        PowerUpManager powerUpManager;
-
+        PowerUpManager powerUps;
         new mySceneManager sceneManager;
+
+        MenuController menuController;
         public GameplayScene(Game game, mySceneManager manager) : base(game, manager)
         {
+            menuController = new MenuController();
             sceneManager = manager;
-            Game.Components.Add(this);
             camera = new Camera(game);
             cm = new CollisionManager(game);
             playerManager = new PlayerManager(game, camera);
             enemies = new EnemyManager(game, playerManager, camera);
             gameplayUI = new GameplayUI(game, playerManager);
-            powerUpManager = new PowerUpManager(game, camera, playerManager);
+            powerUps = new PowerUpManager(game, camera, playerManager);
             addCompsToScene();
         }
 
         void addCompsToScene()
         {
+            addComponentToScene(gameplayUI);
             addComponentToScene(camera);
             addComponentToScene(playerManager.p1);
             addComponentToScene(playerManager.p2);
-
-        }
-
-        public override void Initialize()
-        {
-            //base.Initialize();
-            State = SceneState.active;
+            addComponentToScene(enemies);
+            addComponentToScene(powerUps);
         }
 
         protected override void SceneUpdate()
         {
+            menuController.Update();
             base.SceneUpdate();
+            if (menuController.PressedBack)
+            {
+                sceneManager.ChangeScene(this, sceneManager.PauseMenu);
+            }
             if (playerManager.ResetGame)
             {
                 enemies.ResetSprites();
                 playerManager.ResetPlayers();
                 playerManager.ResetGame = false;
+                sceneManager.ChangeScene(this, sceneManager.GameOver);
             }
+            
             
         }
 
