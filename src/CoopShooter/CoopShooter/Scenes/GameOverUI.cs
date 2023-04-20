@@ -11,6 +11,7 @@ namespace CoopShooter
 {
     public class GameOverUI : MenuUI
     {
+        public int HighScore;
         public GameOverUI(Game game) : base(game)
         {
         }
@@ -18,6 +19,7 @@ namespace CoopShooter
         protected override void drawUI()
         {
             DrawCustomString(ScoreFont, "Game Over", 100, Color.DarkSlateGray);
+            DrawCustomString(ScoreFont, "Your high score is " + HighScore, 200, Color.DarkSlateGray);
             if (GamePad.GetState(0).IsConnected)
             {
                 DrawCustomString(ScoreFont, "Press Y to play again", 400, Color.Green);

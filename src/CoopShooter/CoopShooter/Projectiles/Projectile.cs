@@ -15,7 +15,6 @@ namespace CoopShooter
     {
         float speed;
         Spawner spawner;
-        int maxDistFromPlayer;
         public Projectile(Game game, string texturename, Camera camera, Spawner s) : base(game, texturename, camera)
         {
             setPosition(-800, -800);
@@ -24,13 +23,27 @@ namespace CoopShooter
             speed = 2f;
         }
 
+       
+
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             move(gameTime);
             if (isOutOfBounds())
             {
-                spawner.DeSpawn(this);
+                State = SpriteState.dead;
+            }
+            base.Update(gameTime);
+        }
+
+        protected override void StateBasedUpdate()
+        {
+            switch (State)
+            {
+                case SpriteState.dead:
+                    spawner.DeSpawn(this);
+                    break;
+                case SpriteState.alive:
+                    break;
             }
         }
 
@@ -61,9 +74,6 @@ namespace CoopShooter
             return false;
         }
 
-        protected bool isToFarFromPlayer()
-        {
-            return false;
-        }
+        
     }
 }

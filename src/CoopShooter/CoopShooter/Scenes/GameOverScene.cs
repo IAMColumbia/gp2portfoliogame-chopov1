@@ -19,6 +19,12 @@ namespace CoopShooter
             addComponentToScene(gameOverUI);
         }
 
+        public override void loadScene()
+        {
+            gameOverUI.HighScore = sceneManager.HighScore;
+            base.loadScene();
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

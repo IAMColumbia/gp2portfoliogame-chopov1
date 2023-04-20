@@ -10,8 +10,8 @@ namespace CoopShooter
 {
     public class GunController : GameComponent
     {
-        List<ProjectileDecorator> guns;
-        Stack<ProjectileDecorator> gunUpgrades;
+        List<ProjectileSpawner> guns;
+        Stack<ProjectileSpawner> gunUpgrades;
         public int ActiveGuns { get { return guns.Count; } }
         int TotalGuns;
         Player player;
@@ -19,16 +19,16 @@ namespace CoopShooter
         {
             TotalGuns = 6;
             player = p;
-            guns = new List<ProjectileDecorator>();
-            gunUpgrades = new Stack<ProjectileDecorator>();
-            guns.Add(new ProjectileDecorator(game, camera, 3, p, 0));
+            guns = new List<ProjectileSpawner>();
+            gunUpgrades = new Stack<ProjectileSpawner>();
+            guns.Add(new ProjectileSpawner(game, camera, 3, p, 0));
             createGuns(game, player, camera);
         }
 
         void createGuns(Game game, Player p, Camera camera)
         {
             for(int i =0; i < TotalGuns; i++) {
-                gunUpgrades.Push(new ProjectileDecorator(game, camera, 3, p, i *60));
+                gunUpgrades.Push(new RangedProjectileSpawner(game, camera, 3, p, i *60));
             }
         }
 

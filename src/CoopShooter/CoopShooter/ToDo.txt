@@ -1,7 +1,9 @@
 ﻿
 
 Add More PowerUps
-Add Range to Guns - maybe by checking distance from player and despawning if to far
+Add power up that increases gun range
+add power up that increases gun reload speed
+refine power up that adds a gun (should maybe be aquired after reaching a certain score rather then a pickup)
 Players need to bounce off eachother
 
 power up ideas
@@ -10,6 +12,5 @@ sine wave
 orbit shield thing that activates for a bit
 shield so when you get hit you dont die but you do lose the shield
 
-Add score manager - prolly singleton again
-add start screen and game over scene
+Add score manager - prolly singleton again for saving data and stuff
 

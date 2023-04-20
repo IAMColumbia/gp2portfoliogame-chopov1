@@ -18,8 +18,6 @@ namespace CoopShooter
         float friction;
         
         float maxSpeed;
-
-        ProjectileDecorator gun;
         public int GunLevel { get { return guns.ActiveGuns; } }
 
         public Vector2 ShootDir;

@@ -53,13 +53,23 @@ namespace CoopShooter
             }
             if (playerManager.ResetGame)
             {
+                updateHighScore();
                 enemies.ResetSprites();
+                powerUps.ResetSprites();
                 playerManager.ResetPlayers();
                 playerManager.ResetGame = false;
                 sceneManager.ChangeScene(this, sceneManager.GameOver);
             }
             
             
+        }
+
+        void updateHighScore()
+        {
+            if (playerManager.TotalKills > sceneManager.HighScore)
+            {
+                sceneManager.HighScore = playerManager.TotalKills;
+            }
         }
 
     }

@@ -69,12 +69,23 @@ namespace CoopShooter
                     objToSpawn.Position = pos;
                     objToSpawn.SetRotation(player.Rotation + MathHelper.ToRadians(90));
                     objToSpawn.Direction = getDirMod(rotMod);
+                    objToSpawn.State = SpriteState.alive;
                     objToSpawn.Enabled = true;
                     objToSpawn.Visible = true;
                     return objToSpawn;
                 }
             }
             return null;
+        }
+
+        public void Shoot(Vector2 pos)
+        {
+            SpawnObject(pos);
+        }
+
+        public void Reset()
+        {
+            ResetObjects();
         }
     }
 }

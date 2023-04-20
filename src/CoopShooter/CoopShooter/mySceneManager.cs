@@ -10,6 +10,7 @@ namespace CoopShooter
 {
     public class mySceneManager : SceneManager
     {
+        public int HighScore;
         public Scene MainMenu;
         public Scene Gameplay;
         public Scene GameOver;
