@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace CoopShooter
 {
@@ -13,12 +13,16 @@ namespace CoopShooter
     {
         protected Player player;
         public int rotMod;
-        //create a timer that needs to finish before player can fire again. check if this is complete before spawning an object(wont need this if take rhythm approach)
         Timer reloadTimer;
-        public ProjectileSpawner(Game game, Player p, Camera c,int numberOfObjects, int rotMod) : base(game, c, numberOfObjects)
+        float reloadTime;
+        public ProjectileSpawner(Game game, Camera c,int numberOfObjects, Player p, int rotMod) : base(game, c, numberOfObjects)
         {
-            player = p;
             this.rotMod = rotMod;
+            player = p;
+            reloadTime = 1000;
+            reloadTimer = new Timer(reloadTime);
+            reloadTimer.Elapsed += ReloadComplete;
+            canShoot = true;
         }
 
         public void DestroyedEnemy()
@@ -42,8 +46,20 @@ namespace CoopShooter
                 (float)(player.ShootDir.X * Math.Sin(rotMod) + player.ShootDir.Y * Math.Cos(rotMod)));
         }
 
+        bool canShoot;
+
+        void ReloadComplete(Object source, ElapsedEventArgs e)
+        {
+            canShoot = true;
+        }
         public override Sprite SpawnObject(Vector2 pos)
         {
+            if (!canShoot)
+            {
+                return null;
+            }
+            canShoot = false;
+            reloadTimer.Start();
             if (objects.Count > 0)
             {
                 if (objects.Peek().Enabled == false)

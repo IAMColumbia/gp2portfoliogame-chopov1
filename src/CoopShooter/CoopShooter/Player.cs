@@ -20,6 +20,7 @@ namespace CoopShooter
         float maxSpeed;
 
         ProjectileDecorator gun;
+        public int GunLevel { get { return guns.ActiveGuns; } }
 
         public Vector2 ShootDir;
 
@@ -29,41 +30,30 @@ namespace CoopShooter
         Texture2D liveTexture;
 
         public int Kills;
-
-        List<ProjectileDecorator> guns;
-
-        public Camera camera;
+        
+        //create a timer that needs to finish before player can fire again. check if this is complete before spawning an object(wont need this if take rhythm approach)
+        GunController guns;
 
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
+            guns = new GunController(game, this, camera);
             this.camera = camera;
-            guns = new List<ProjectileDecorator>();
             colInfo.tag = CollisionTag.Player;
             Position= new Vector2(100, 100);
             controller= new PlayerController(playerNumber);
             maxSpeed= 1.0f;
             acceleration = 0.06f;
             friction = 0.02f;
-            gun = new ProjectileDecorator(game, this,camera, 3, 0);
-            guns.Add(gun);
         }
-
-        void ResetGuns()
+        
+        public void AddGun()
         {
-            foreach(ProjectileDecorator gun in guns)
-            {
-                gun.Reset();
-            }
-        }
-
-        public Vector2 GetShootMod()
-        {
-            return new Vector2(guns.Count, guns.Count);
+            guns.AddGun();
         }
 
         public void ResetPlayer(Vector2 startPos)
         {
-            ResetGuns();
+            guns.Reset();
             Kills = 0;
             State = SpriteState.alive;
         }
@@ -170,7 +160,6 @@ namespace CoopShooter
             }
 
         }
-        Vector2 otherVel;
         protected override void onCollisionEnd(CollisionObj obj)
         {
             base.onCollisionEnd(obj);
@@ -208,17 +197,9 @@ namespace CoopShooter
             rotationDir = Vector2.Normalize(Position - otherpos);
         }
 
-        public void AddProjectileDecorator(ProjectileDecorator pd)
-        {
-            guns.Add(pd);
-        }
-
         void shootProjectiles()
         {
-            foreach(var gun in guns)
-            {
-                gun.Shoot(this.Position);
-            }
+            guns.Shoot();
         }
 
         private bool hasShot;
@@ -243,11 +224,6 @@ namespace CoopShooter
         {
             Position += velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             addFriction();
-        }
-
-        private Vector2 getDirectionFromMouse()
-        {
-            return Vector2.Normalize(Position - controller.MousePos);
         }
 
         private void setVelocity()

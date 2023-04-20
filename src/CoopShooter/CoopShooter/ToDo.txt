@@ -1,0 +1,9 @@
+﻿
+
+Add More PowerUps
+Add Timer Reload Timer To Guns
+Add Range to Guns - maybe by checking distance from player and despawning if to far
+
+Add score manager - prolly singleton again
+add start screen and game over scene
+

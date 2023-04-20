@@ -12,9 +12,9 @@ namespace CoopShooter
     {
         ProjectileSpawner gun;
         
-        public ProjectileDecorator(Game game, Player p, Camera c, int numberOfObjects, int rotMod)
+        public ProjectileDecorator(Game game, Camera c, int numberOfObjects, Player p, int rotMod)
         {
-            gun = new ProjectileSpawner(game, p, c, numberOfObjects, rotMod);
+            gun = new ProjectileSpawner(game, c, numberOfObjects, p, rotMod);
         }
 
         public void Shoot(Vector2 pos)

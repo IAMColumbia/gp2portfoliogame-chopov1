@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using RhythmGameLibrary;
-using CoopShooter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace CoopShooter
 {
-    public class EnemySpawner : Spawner
+    internal class PowerUpSpawner : Spawner
     {
         Camera c;
         PlayerManager pm;
-        public EnemySpawner(Game game, PlayerManager pm, Camera c, int numberOfObjects) : base(game, c, numberOfObjects)
+        public PowerUpSpawner(Game game, Camera c, int numberOfObjects, PlayerManager pm) : base(game, c, numberOfObjects)
         {
             this.pm = pm;
             this.c = c;
@@ -22,7 +20,7 @@ namespace CoopShooter
 
         public override Sprite createSpawnableObject()
         {
-            return new Enemy(Game, this, c, pm);
+            return new PowerUp(Game, this, c, pm);
         }
 
         public override Sprite SpawnObject(Vector2 pos)
@@ -36,14 +34,14 @@ namespace CoopShooter
                     objToSpawn.Position = pos;
                     objToSpawn.Enabled = true;
                     objToSpawn.Visible = true;
-                    ((Enemy)objToSpawn).SetTarget(pm.GetMidpoint());
-                    objToSpawn.State = SpriteState.alive; 
+                    ((PowerUp)objToSpawn).SetTarget(pm.GetMidpoint());
+                    objToSpawn.State = SpriteState.alive;
                     return objToSpawn;
                 }
             }
             return null;
         }
 
-      
+
     }
 }

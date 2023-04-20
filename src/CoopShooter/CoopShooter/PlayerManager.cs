@@ -17,8 +17,6 @@ namespace CoopShooter
             p1 = new Player(game, 0, "TestShip2", 1, 1, camera);
             p2 = new Player(game, 1, "TestShip1", 1, 2, camera);
             p2.Position = p1.Position + new Vector2(200, 200);
-            CollisionManager.instance.AddCollidableObj(p1);
-            CollisionManager.instance.AddCollidableObj(p2);
         }
 
         public void ResetPlayers()
@@ -34,10 +32,11 @@ namespace CoopShooter
             base.Update(gameTime);
         }
 
-        public Vector2 GetEnemyTargetPos()
+        public Vector2 GetMidpoint()
         {
             return new Vector2((p1.Position.X + p2.Position.X)/2, (p1.Position.Y + p2.Position.Y )/2);
         }
 
+      
     }
 }

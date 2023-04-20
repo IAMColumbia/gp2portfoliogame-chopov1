@@ -9,15 +9,27 @@ using System.Threading.Tasks;
 
 namespace CoopShooter
 {
+    public struct AnimationData
+    {
+        public float frameTime;
+        public int frames;
+        public string texturename;
+        public AnimationData(string texturename, int frames, float frameTime )
+        {
+            this.frames = frames;
+            this.texturename = texturename;
+            this.frameTime = frameTime;
+        }
+    }
     public class AnimatableSprite : CollidableSprite
     {
         Animation animation;
         int frames;
         float frameTime;
-        public AnimatableSprite(Game game, string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
+        public AnimatableSprite(Game game, AnimationData anim, Camera camera) : base(game, anim.texturename, camera)
         {
-            this.frames = frames;
-            this.frameTime = frameTime;
+            frames = anim.frames;
+            frameTime = anim.frameTime;
         }
 
         protected override void LoadContent()

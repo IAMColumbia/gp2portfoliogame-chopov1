@@ -15,6 +15,7 @@ namespace CoopShooter
     {
         float speed;
         Spawner spawner;
+        int maxDistFromPlayer;
         public Projectile(Game game, string texturename, Camera camera, Spawner s) : base(game, texturename, camera)
         {
             setPosition(-800, -800);
@@ -57,6 +58,11 @@ namespace CoopShooter
             {
                 return true;
             }
+            return false;
+        }
+
+        protected bool isToFarFromPlayer()
+        {
             return false;
         }
     }

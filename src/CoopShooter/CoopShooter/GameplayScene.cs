@@ -9,16 +9,17 @@ using System.Threading.Tasks;
 
 namespace CoopShooter
 {
-    public class MainScene : Scene
+    public class GameplayScene : Scene
     {
         CollisionManager cm;
         public PlayerManager playerManager { get; private set; }
         EnemyManager enemies;
         Camera camera;
         GameplayUI gameplayUI;
+        PowerUpManager powerUpManager;
 
         new mySceneManager sceneManager;
-        public MainScene(Game game, mySceneManager manager) : base(game, manager)
+        public GameplayScene(Game game, mySceneManager manager) : base(game, manager)
         {
             sceneManager = manager;
             Game.Components.Add(this);
@@ -27,6 +28,7 @@ namespace CoopShooter
             playerManager = new PlayerManager(game, camera);
             enemies = new EnemyManager(game, playerManager, camera);
             gameplayUI = new GameplayUI(game, playerManager);
+            powerUpManager = new PowerUpManager(game, camera, playerManager);
             addCompsToScene();
         }
 
@@ -49,19 +51,12 @@ namespace CoopShooter
             base.SceneUpdate();
             if (playerManager.ResetGame)
             {
-                enemies.ResetEnemies();
+                enemies.ResetSprites();
                 playerManager.ResetPlayers();
                 playerManager.ResetGame = false;
             }
-            if (sceneManager.sceneInput.ReleasedKey(Microsoft.Xna.Framework.Input.Keys.B))
-            {
-                OpenShop();
-            }
+            
         }
 
-        private void OpenShop()
-        {
-            sceneManager.ChangeScene(((mySceneManager)sceneManager).gamePlay, ((mySceneManager)sceneManager).shop);
-        }
     }
 }

@@ -10,15 +10,17 @@ namespace CoopShooter
 {
     public class mySceneManager : SceneManager
     {
-        public Scene gamePlay;
-        public Scene shop;
+        public Scene MainMenu;
+        public Scene Gameplay;
+        public Scene GameOver;
+        public Scene PauseMenu;
         public InputHandler sceneInput;
         public mySceneManager(Game game) : base(game)
         {
             Game.Components.Add(this);
             sceneInput = new InputHandler();
-            gamePlay = new MainScene(game, this);
-            shop = new ShopScene(game,this, ((MainScene)gamePlay).playerManager);
+            MainMenu = new 
+            Gameplay = new GameplayScene(game, this);
         }
 
         public override void Update(GameTime gameTime)
