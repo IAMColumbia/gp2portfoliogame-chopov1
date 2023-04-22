@@ -38,6 +38,9 @@ namespace CoopShooter
                 case CollisionTag.Projectile:
                     State = SpriteState.dead;
                     break;
+                case CollisionTag.Player:
+                    State = SpriteState.dead;
+                    break;
 
             }
         }

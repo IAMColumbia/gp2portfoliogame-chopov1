@@ -37,9 +37,9 @@ namespace RhythmGameLibrary
         protected bool showMarkers;
         public Sprite(Game game, string texturename, Camera camera) : base(game)
         {
+            Game.Components.Add(this);
             showMarkers = false;
             this.camera = camera;
-            Game.Components.Add(this);
             TextureName = texturename;
             scale = 1.8f;
             Rotation = 0;

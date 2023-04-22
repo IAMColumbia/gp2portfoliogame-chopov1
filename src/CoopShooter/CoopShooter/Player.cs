@@ -13,6 +13,7 @@ namespace CoopShooter
 {
     public class Player : CollidableSprite
     {
+        public bool HasShield;
         PlayerController controller;
         float acceleration;
         float friction;
@@ -32,8 +33,13 @@ namespace CoopShooter
         //create a timer that needs to finish before player can fire again. check if this is complete before spawning an object(wont need this if take rhythm approach)
         GunController guns;
 
+        public int Range;
+
+        Texture2D ShieldTexture;
+
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
+            Range = 200;
             guns = new GunController(game, this, camera);
             this.camera = camera;
             colInfo.tag = CollisionTag.Player;
@@ -43,23 +49,62 @@ namespace CoopShooter
             acceleration = 0.06f;
             friction = 0.02f;
         }
-        
+
+        #region PowerUpMethods
         public void AddGun()
         {
             guns.AddGun();
         }
 
+        public void UpgradeRange(int r)
+        {
+            Range += r;
+        }
+
+        public void AddShield()
+        {
+            HasShield = true;
+        }
+
+        public void UpgradeReloadSpeed(int s)
+        {
+            guns.UpgradeReloadSpeed(s);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
+            if(HasShield)
+            {
+                spriteBatch.Begin();
+                //maybe abstract this into a "drawAdditionLayer" method in sprite or something
+                spriteBatch.Draw(ShieldTexture,
+                new Vector2(Rect.X + ShieldTexture.Width, Rect.Y + ShieldTexture.Height),
+                null,
+                Color.White * transparency,
+                Rotation,
+                origin,
+                scale,
+                effect,
+                0);
+                spriteBatch.End();
+            }
+        }
+
+        #endregion
         public void ResetPlayer(Vector2 startPos)
         {
             guns.Reset();
             Kills = 0;
             State = SpriteState.alive;
+            HasShield = false;
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
             deadTexture = Game.Content.Load<Texture2D>("TestPlayerDead");
+            ShieldTexture = Game.Content.Load<Texture2D>("Shield");
             liveTexture = spriteTexture;
         }
 
@@ -112,8 +157,16 @@ namespace CoopShooter
                     collideWithSimilarType(obj);
                     break;
                 case CollisionTag.Enemy:
-                    State = SpriteState.dead;
-                    
+                    //check if player has shield
+                    if (HasShield)
+                    {
+                        HasShield = false;
+                    }
+                    else
+                    {
+                        State = SpriteState.dead;
+
+                    }
                     break;
                 case CollisionTag.none:
                     collidingWithPlayer = false;

@@ -21,6 +21,7 @@ namespace CoopShooter
 
         public override void Update(GameTime gameTime)
         {
+            maxDistFromPlayer = player.Range;
             if (isToFarFromPlayer())
             {
                 State = SpriteState.dead;

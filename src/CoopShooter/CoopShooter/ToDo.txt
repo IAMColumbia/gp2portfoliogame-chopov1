@@ -1,7 +1,6 @@
 ﻿
 
 Add More PowerUps
-Add power up that increases gun range
 add power up that increases gun reload speed
 refine power up that adds a gun (should maybe be aquired after reaching a certain score rather then a pickup)
 Players need to bounce off eachother
@@ -10,7 +9,9 @@ power up ideas
 maybe a projectile that multiplies when it hits enemy
 sine wave
 orbit shield thing that activates for a bit
-shield so when you get hit you dont die but you do lose the shield
+shield so when you get hit you dont die but you do lose the shield - done
 
 Add score manager - prolly singleton again for saving data and stuff
+
+Add spawn indicators for enemies. Make a rect to represent the graphics device viewport area. have enemies spawn a indicator texture along the path from them to their target on an x or Y cord of the viewport rect. while the enemies x or y is outside the viewport rect show the indicator. use just a bool that checks pos for this
 

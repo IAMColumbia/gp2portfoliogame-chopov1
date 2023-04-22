@@ -6,21 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoopShooter
+namespace CoopShooter.PowerUps
 {
-    internal class PowerUpSpawner : Spawner
+    public class PowerUpSpawner : Spawner
     {
-        Camera c;
-        PlayerManager pm;
+        protected PlayerManager pm;
         public PowerUpSpawner(Game game, Camera c, int numberOfObjects, PlayerManager pm) : base(game, c, numberOfObjects)
         {
             this.pm = pm;
-            this.c = c;
         }
 
         public override Sprite createSpawnableObject()
         {
-            return new PowerUp(Game, this, c, pm);
+            return new PowerUp(Game, this, camera, pm);
         }
 
         public override Sprite SpawnObject(Vector2 pos)

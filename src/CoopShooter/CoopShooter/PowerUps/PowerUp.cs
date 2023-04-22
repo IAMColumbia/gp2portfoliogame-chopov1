@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoopShooter
+namespace CoopShooter.PowerUps
 {
     public class PowerUp : MovingSprite
     {
-        public PowerUp(Game game, Spawner s, Camera camera, PlayerManager pm) : base(game, new AnimationData("Laser", 1, 1), camera, s, pm)
+        public PowerUp(Game game, Spawner s, Camera camera, PlayerManager pm) : base(game, new AnimationData("PowerUpShit", 2, 0.5f), camera, s, pm)
         {
             minSpeed = 8; maxSpeed = 15;
         }
@@ -22,18 +22,19 @@ namespace CoopShooter
             {
                 case CollisionTag.Player:
                     //add powerup to player
-                        upgradePlayer(obj.id);
-                        State = SpriteState.dead;
+                    player = (Player)CollisionManager.instance.GetCollidable(obj.id);
+                    activatePowerup(player);
+                    State = SpriteState.dead;
                     break;
                 default: break;
             }
         }
 
-        Player p;
+        protected Player player;
 
-        void upgradePlayer(int id)
+        protected virtual void activatePowerup(Player p)
         {
-            p = ((Player)CollisionManager.instance.GetCollidable(id));
+            DynamicTextSpawner.instance.ActivateText("Gun +1", p.Position);
             p.AddGun();
         }
     }

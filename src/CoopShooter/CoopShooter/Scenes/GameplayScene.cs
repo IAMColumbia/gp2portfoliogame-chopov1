@@ -1,4 +1,4 @@
-﻿using CoopShooter;
+﻿using CoopShooter.PowerUps;
 using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
 using System;
@@ -12,6 +12,7 @@ namespace CoopShooter
     public class GameplayScene : Scene
     {
         CollisionManager cm;
+        DynamicTextSpawner dts;
         public PlayerManager playerManager { get; private set; }
         EnemyManager enemies;
         Camera camera;
@@ -26,6 +27,7 @@ namespace CoopShooter
             sceneManager = manager;
             camera = new Camera(game);
             cm = new CollisionManager(game);
+            dts = new DynamicTextSpawner(game, camera);
             playerManager = new PlayerManager(game, camera);
             enemies = new EnemyManager(game, playerManager, camera);
             gameplayUI = new GameplayUI(game, playerManager);

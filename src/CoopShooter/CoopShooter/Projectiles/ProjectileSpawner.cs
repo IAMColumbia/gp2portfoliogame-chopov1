@@ -15,11 +15,13 @@ namespace CoopShooter
         public int rotMod;
         Timer reloadTimer;
         float reloadTime;
+        float defRelTime;
         public ProjectileSpawner(Game game, Camera c,int numberOfObjects, Player p, int rotMod) : base(game, c, numberOfObjects)
         {
             this.rotMod = rotMod;
             player = p;
-            reloadTime = 1000;
+            defRelTime = 1000;
+            reloadTime = defRelTime;
             reloadTimer = new Timer(reloadTime);
             reloadTimer.Elapsed += ReloadComplete;
             canShoot = true;
@@ -83,8 +85,15 @@ namespace CoopShooter
             SpawnObject(pos);
         }
 
+        public void upgradeReloadTime(int time)
+        {
+            reloadTime -= time;
+            reloadTimer = new Timer(reloadTime);
+        }
+
         public void Reset()
         {
+            reloadTime = defRelTime;
             ResetObjects();
         }
     }

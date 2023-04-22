@@ -37,6 +37,11 @@ namespace CoopShooter
             guns.Add(gunUpgrades.Pop());
         }
 
+        public void UpgradeReloadSpeed(int speedIncrease)
+        {
+            guns[0].upgradeReloadTime(speedIncrease);
+        }
+
         public void Shoot()
         {
             foreach (var gun in guns)

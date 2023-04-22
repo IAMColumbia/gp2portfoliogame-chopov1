@@ -32,7 +32,7 @@ namespace CoopShooter
         }
 
         //maybe make a manager state enum cuz this could work for playermanager to
-        public void ResetSprites()
+        public virtual void ResetSprites()
         {
             spawner.ResetObjects();
         }
