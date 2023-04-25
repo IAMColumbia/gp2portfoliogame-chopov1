@@ -23,8 +23,8 @@ namespace CoopShooter
     }
     public class AnimatableSprite : CollidableSprite
     {
-        Animation animation;
-        int frames;
+        protected Animation animation;
+        protected int frames;
         float frameTime;
         public AnimatableSprite(Game game, AnimationData anim, Camera camera) : base(game, anim.texturename, camera)
         {

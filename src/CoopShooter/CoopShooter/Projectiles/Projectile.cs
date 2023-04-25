@@ -17,7 +17,7 @@ namespace CoopShooter
         Spawner spawner;
         public Projectile(Game game, string texturename, Camera camera, Spawner s) : base(game, texturename, camera)
         {
-            setPosition(-800, -800);
+            SetPosition(-800, -800);
             colInfo.tag = CollisionTag.Projectile;
             this.spawner = s;
             speed = 2f;

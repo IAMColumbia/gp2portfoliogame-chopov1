@@ -16,8 +16,8 @@ namespace CoopShooter
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.PreferredBackBufferWidth = 1920 - 100;
+            _graphics.PreferredBackBufferHeight = 1080 - 100;
             _graphics.ApplyChanges();
 
             gameStateManager = new GameStateManager(this);

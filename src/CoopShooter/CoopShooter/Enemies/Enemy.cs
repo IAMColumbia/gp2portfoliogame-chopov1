@@ -1,5 +1,4 @@
-﻿using CoopShooter;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
 using System;
 using System.Collections.Generic;
@@ -8,18 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoopShooter
+namespace CoopShooter.Enemies
 {
     public class Enemy : MovingSprite
     {
         int health;
         float speed;
-
-        public Enemy(Game game, EnemySpawner s,Camera c, PlayerManager pm) : base (game, new AnimationData("AnimationTest", 3, 6), c, s, pm){
+        SpawnIndicator indicator;
+        public Enemy(Game game, EnemySpawner s, Camera c, PlayerManager pm) : base(game, new AnimationData("EnemyAnim2-Sheet", 2, 0.2f), c, s, pm)
+        {
             colInfo.tag = CollisionTag.Enemy;
-            setPosition(-200, -200);
+            SetPosition(-200, -200);
             speed = 1f;
-            Direction = new Vector2(1,0);
+            Direction = new Vector2(1, 0);
+            indicator = new SpawnIndicator(Game, camera, this);
+        }
+
+        public void Activate()
+        {
+            indicator.Activate();
         }
 
         public override void Update(GameTime gameTime)
@@ -30,7 +36,7 @@ namespace CoopShooter
         protected override void onCollision(CollisionObj obj)
         {
             base.onCollision(obj);
-            switch(obj.tag)
+            switch (obj.tag)
             {
                 case CollisionTag.Enemy:
                     //collideWithSimilarType(obj);

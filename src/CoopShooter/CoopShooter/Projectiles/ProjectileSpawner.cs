@@ -20,7 +20,7 @@ namespace CoopShooter
         {
             this.rotMod = rotMod;
             player = p;
-            defRelTime = 1000;
+            defRelTime = 500;
             reloadTime = defRelTime;
             reloadTimer = new Timer(reloadTime);
             reloadTimer.Elapsed += ReloadComplete;
@@ -68,7 +68,7 @@ namespace CoopShooter
                 {
                     Sprite objToSpawn = objects.Dequeue();
                     objects.Enqueue(objToSpawn);
-                    objToSpawn.Position = pos;
+                    objToSpawn.SetPosition(pos.X, pos.Y);
                     objToSpawn.SetRotation(player.Rotation + MathHelper.ToRadians(90));
                     objToSpawn.Direction = getDirMod(rotMod);
                     objToSpawn.State = SpriteState.alive;
@@ -87,7 +87,10 @@ namespace CoopShooter
 
         public void upgradeReloadTime(int time)
         {
-            reloadTime -= time;
+            if(reloadTime - time > 0)
+            {
+                reloadTime -= time;
+            }
             reloadTimer = new Timer(reloadTime);
         }
 

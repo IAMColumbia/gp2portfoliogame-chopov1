@@ -1,3 +1,6 @@
 ﻿Was working on gun upgrades and created a whole complex system to add guns through powerups to player, then realized i could literally just store all the guns in the player and only set them to active when the player collides with a power up. Very good reminder lesson to think less like a designer and more like a programmer lol.
 
 I also think i tried to use a programming pattern where one was not needed, I thought "Oh! guns would be a great place to put the decorator to use" but actually it really doesnt need to be a decorator as there is a limit to the gun upgrades anyways to
+
+
+I want to change the score to time, as the core focus of the game seems to be about staying alive. The guns seem offensive but really they help you stave off death longer. especially since this is an arcade game I feel it should always result in death anyways.

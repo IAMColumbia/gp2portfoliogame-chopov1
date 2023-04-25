@@ -11,6 +11,8 @@ namespace CoopShooter
         public Player p2 { get; protected set; }
         public int TotalKills { get { return p1.Kills + p2.Kills; } }
 
+        public int TotalLevel { get { return p1.Level + p2.Level; } }
+
         public bool ResetGame { get { return p1.State == SpriteState.dead || p2.State == SpriteState.dead; } set { } }
         public PlayerManager(Game game, Camera camera) : base(game) {
             Game.Components.Add(this);

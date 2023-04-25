@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RhythmGameLibrary;
-using CoopShooter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoopShooter
+namespace CoopShooter.Enemies
 {
     public class EnemySpawner : Spawner
     {
@@ -33,17 +32,18 @@ namespace CoopShooter
                 {
                     Sprite objToSpawn = objects.Dequeue();
                     objects.Enqueue(objToSpawn);
-                    objToSpawn.Position = pos;
-                    objToSpawn.Enabled = true;
+                    objToSpawn.SetPosition(pos.X, pos.Y);
                     objToSpawn.Visible = true;
                     ((Enemy)objToSpawn).SetTarget(pm.GetMidpoint());
-                    objToSpawn.State = SpriteState.alive; 
+                    ((Enemy)objToSpawn).Activate();
+                    objToSpawn.State = SpriteState.alive;
+                    objToSpawn.Enabled = true;
                     return objToSpawn;
                 }
             }
             return null;
         }
 
-      
+
     }
 }

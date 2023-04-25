@@ -34,7 +34,10 @@ namespace CoopShooter
 
         public void AddGun()
         {
-            guns.Add(gunUpgrades.Pop());
+            if(gunUpgrades.Count > 0)
+            {
+                guns.Add(gunUpgrades.Pop());
+            }
         }
 
         public void UpgradeReloadSpeed(int speedIncrease)

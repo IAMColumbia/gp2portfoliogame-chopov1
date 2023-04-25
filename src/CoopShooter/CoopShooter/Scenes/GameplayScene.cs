@@ -1,4 +1,5 @@
-﻿using CoopShooter.PowerUps;
+﻿using CoopShooter.Enemies;
+using CoopShooter.PowerUps;
 using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
 using System;
@@ -21,17 +22,22 @@ namespace CoopShooter
         new mySceneManager sceneManager;
 
         MenuController menuController;
+
+        BackgroundStars bg;
+
         public GameplayScene(Game game, mySceneManager manager) : base(game, manager)
         {
             menuController = new MenuController();
             sceneManager = manager;
             camera = new Camera(game);
+            bg = new BackgroundStars(game, camera);
             cm = new CollisionManager(game);
             dts = new DynamicTextSpawner(game, camera);
             playerManager = new PlayerManager(game, camera);
             enemies = new EnemyManager(game, playerManager, camera);
             gameplayUI = new GameplayUI(game, playerManager);
             powerUps = new PowerUpManager(game, camera, playerManager);
+            
             addCompsToScene();
         }
 
@@ -62,8 +68,6 @@ namespace CoopShooter
                 playerManager.ResetGame = false;
                 sceneManager.ChangeScene(this, sceneManager.GameOver);
             }
-            
-            
         }
 
         void updateHighScore()

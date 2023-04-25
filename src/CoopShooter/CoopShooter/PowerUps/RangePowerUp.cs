@@ -18,7 +18,7 @@ namespace CoopShooter.PowerUps
 
         protected override void activatePowerup(Player p)
         {
-            DynamicTextSpawner.instance.ActivateText("Range +" + upgradeAmnt.ToString() +"\nFire Rate +200", p.Position);
+            DynamicTextSpawner.instance.ActivateText("Range +" + upgradeAmnt.ToString(), p.Position);
             p.UpgradeRange(upgradeAmnt);
             p.UpgradeReloadSpeed(upgradeAmnt);
         }

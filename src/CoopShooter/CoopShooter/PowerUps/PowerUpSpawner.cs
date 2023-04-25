@@ -29,7 +29,7 @@ namespace CoopShooter.PowerUps
                 {
                     Sprite objToSpawn = objects.Dequeue();
                     objects.Enqueue(objToSpawn);
-                    objToSpawn.Position = pos;
+                    objToSpawn.SetPosition(pos.X, pos.Y);
                     objToSpawn.Enabled = true;
                     objToSpawn.Visible = true;
                     ((PowerUp)objToSpawn).SetTarget(pm.GetMidpoint());

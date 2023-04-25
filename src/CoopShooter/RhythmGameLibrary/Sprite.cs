@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace RhythmGameLibrary
 {
-    public enum SpriteState { alive, dead, inactive }
+    public enum SpriteState { alive, dead, inactive, active }
 
     public class Sprite : DrawableGameComponent, ISceneComponenet
     {
@@ -87,7 +87,7 @@ namespace RhythmGameLibrary
            
         }
 
-        protected void setPosition(float x, float y)
+        public void SetPosition(float x, float y)
         {
             Position = new Vector2(x, y);
             Rect.X = (int)Position.X;

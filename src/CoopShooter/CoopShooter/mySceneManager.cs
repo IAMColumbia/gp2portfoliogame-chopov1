@@ -26,6 +26,7 @@ namespace CoopShooter
             GameOver = new GameOverScene(game, this);
             
             MainMenu.State = SceneState.loading;
+            
         }
 
         public override void Update(GameTime gameTime)

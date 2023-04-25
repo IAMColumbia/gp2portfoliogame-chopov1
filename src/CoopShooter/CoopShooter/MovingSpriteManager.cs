@@ -12,8 +12,15 @@ namespace CoopShooter
 {
     public class MovingSpriteManager : GameComponent, ISceneComponenet
     {
+        int minIndicatorTime;
+        int maxIndicatorTime;
+
+        protected PlayerManager playerManager;
         public MovingSpriteManager(Game game, Camera c, PlayerManager pm, int spawnRate) : base(game)
         {
+            playerManager = pm;
+            minIndicatorTime = 200;
+            maxIndicatorTime = 300;
             random = new Random();
             Game.Components.Add(this);
             spawnTimer = new Timer(spawnRate);
@@ -56,23 +63,23 @@ namespace CoopShooter
             {
                 case 0:
                     //right of screen
-                    spawnPoint.X = random.Next(Game.GraphicsDevice.Viewport.Width + 10, Game.GraphicsDevice.Viewport.Width + 30);
+                    spawnPoint.X = random.Next(Game.GraphicsDevice.Viewport.Width + minIndicatorTime, Game.GraphicsDevice.Viewport.Width + maxIndicatorTime);
                     spawnPoint.Y = random.Next(0, Game.GraphicsDevice.Viewport.Height);
                     break;
                 case 1:
                     //left
-                    spawnPoint.X = random.Next(-30, 0);
+                    spawnPoint.X = random.Next(-maxIndicatorTime, -minIndicatorTime);
                     spawnPoint.Y = random.Next(0, Game.GraphicsDevice.Viewport.Height);
                     break;
                 case 2:
                     //bottom
                     spawnPoint.X = random.Next(0, Game.GraphicsDevice.Viewport.Width);
-                    spawnPoint.Y = random.Next(Game.GraphicsDevice.Viewport.Height + 10, Game.GraphicsDevice.Viewport.Height + 30);
+                    spawnPoint.Y = random.Next(Game.GraphicsDevice.Viewport.Height + minIndicatorTime, Game.GraphicsDevice.Viewport.Height + maxIndicatorTime);
                     break;
                 case 3:
                     //top
                     spawnPoint.X = random.Next(0, Game.GraphicsDevice.Viewport.Width);
-                    spawnPoint.Y = random.Next(-30, 0);
+                    spawnPoint.Y = random.Next(-maxIndicatorTime, -minIndicatorTime);
                     break;
             }
 

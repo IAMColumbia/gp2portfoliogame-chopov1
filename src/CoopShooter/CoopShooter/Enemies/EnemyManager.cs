@@ -1,5 +1,4 @@
-﻿using CoopShooter;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
 using System;
 using System.Collections.Generic;
@@ -8,29 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 
-namespace CoopShooter
+namespace CoopShooter.Enemies
 {
     public class EnemyManager : MovingSpriteManager
     {
-        public EnemyManager(Game game, PlayerManager pm, Camera c) : base(game, c, pm, 500)
+        int spawnOdds;
+        int maxSpawnOdds;
+        public EnemyManager(Game game, PlayerManager pm, Camera c) : base(game, c, pm, 200)
         {
-            spawner = new EnemySpawner(Game, pm, c, 20);
+            spawner = new EnemySpawner(Game, pm, c, 24);
+            maxSpawnOdds = 15;
+            spawnOdds = maxSpawnOdds;
         }
 
-
-        public override void SpawnSprite(Object source, ElapsedEventArgs e)
+        public override void SpawnSprite(object source, ElapsedEventArgs e)
         {
-            int spawn = random.Next(0, 12);
+            if(playerManager.TotalLevel < maxSpawnOdds)
+            {
+                spawnOdds = ( maxSpawnOdds - playerManager.TotalLevel);
+            }
+            int spawn = random.Next(0, spawnOdds);
             switch (spawn)
             {
                 default:
                     break;
                 case 0:
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
                     spawner.SpawnObject(getRandomSpawnPos());
                     break;
             }

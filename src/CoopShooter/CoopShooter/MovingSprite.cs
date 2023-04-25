@@ -13,17 +13,20 @@ namespace CoopShooter
         int health;
         float speed;
         protected int minSpeed, maxSpeed;
-        Vector2 target;
+        public Vector2 target { get; protected set; }
         Spawner spawner;
         PlayerManager pm;
         Random rnd;
+
+        int despawnBuffer;
         public MovingSprite(Game game, AnimationData anim, Camera camera, Spawner s, PlayerManager pm) : base(game,anim, camera)
         {
+            despawnBuffer = 400;
             minSpeed = 3;
             maxSpeed = 9;
             spawner = s;
             this.pm = pm;
-            setPosition(-200, -200);
+            SetPosition(-200, -200);
             speed = 1f;
             Direction = new Vector2(1, 0);
             rnd = new Random();
@@ -80,7 +83,7 @@ namespace CoopShooter
 
         protected bool isOffScreen()
         {
-            if (Position.Y > Game.GraphicsDevice.Viewport.Height + 100 || Position.Y < -100 || Position.X > Game.GraphicsDevice.Viewport.Width + 100 || Position.X < -100)
+            if (Position.Y > Game.GraphicsDevice.Viewport.Height + despawnBuffer || Position.Y < -despawnBuffer|| Position.X > Game.GraphicsDevice.Viewport.Width + despawnBuffer || Position.X < -despawnBuffer)
             {
                 return true;
             }

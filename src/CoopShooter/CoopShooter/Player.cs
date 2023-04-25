@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using CoopShooter;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,6 +14,7 @@ namespace CoopShooter
 {
     public class Player : CollidableSprite
     {
+        public int Level;
         public bool HasShield;
         PlayerController controller;
         float acceleration;
@@ -37,6 +39,8 @@ namespace CoopShooter
 
         Texture2D ShieldTexture;
 
+        Timer fireTimer;
+
         public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
         {
             Range = 200;
@@ -48,6 +52,18 @@ namespace CoopShooter
             maxSpeed= 1.0f;
             acceleration = 0.06f;
             friction = 0.02f;
+
+            fireTimer = new Timer(600);
+            fireTimer.Elapsed += shootProjectiles;
+            
+        }
+
+        void shootProjectiles(Object o, ElapsedEventArgs e)
+        {
+            if(Enabled)
+            {
+                guns.Shoot();
+            }
         }
 
         #region PowerUpMethods
@@ -95,6 +111,7 @@ namespace CoopShooter
         public void ResetPlayer(Vector2 startPos)
         {
             guns.Reset();
+            Level = 0;
             Kills = 0;
             State = SpriteState.alive;
             HasShield = false;
@@ -111,6 +128,7 @@ namespace CoopShooter
         public void AddScore()
         {
             Kills++;
+            Level++;
         }
 
         protected override void updateRotation()
@@ -137,6 +155,10 @@ namespace CoopShooter
                     {
                         spriteTexture = liveTexture;
                     }
+                    if (!fireTimer.Enabled)
+                    {
+                        fireTimer.Start();
+                    }
                     break;
                 case SpriteState.dead:
                     if (spriteTexture != deadTexture)
@@ -154,12 +176,13 @@ namespace CoopShooter
             switch (obj.tag)
             {
                 case CollisionTag.Player:
-                    collideWithSimilarType(obj);
+                    //collideWithSimilarType(obj);
                     break;
                 case CollisionTag.Enemy:
                     //check if player has shield
                     if (HasShield)
                     {
+
                         HasShield = false;
                     }
                     else
@@ -169,7 +192,6 @@ namespace CoopShooter
                     }
                     break;
                 case CollisionTag.none:
-                    collidingWithPlayer = false;
                     break;
             }
         }
@@ -220,24 +242,6 @@ namespace CoopShooter
                     spriteTexture = liveTexture;
                     break;
                 case CollisionTag.Player:
-                    //need to handle velocity zero case in collisionEnd becuase the order in which the velocity is flipped affects the direction in which the ship is launched. (toward or away from the other ship) this way we only launch the ships away from eachother becuase we get abs value and we know for sure the other player flipped its velocity already.
-                    /*if (collidingWithPlayer)
-                    {
-                        if (velocity == Vector2.Zero)
-                        {
-                            otherVel = CollisionManager.instance.GetCollidable(obj.id).GetVelocity() / 2;
-                            velocity = new Vector2(Math.Abs(otherVel.X), Math.Abs(otherVel.Y));
-                            if (otherVel.X > 0)
-                            {
-                                velocity.X *= -1;
-                            }
-                            if (otherVel.Y > 0)
-                            {
-                                velocity.Y *= -1;
-                            }
-                        }
-                    }*/
-                    collidingWithPlayer = false;
                     break;
 
             }
@@ -248,16 +252,13 @@ namespace CoopShooter
             rotationDir = Vector2.Normalize(Position - otherpos);
         }
 
-        void shootProjectiles()
-        {
-            guns.Shoot();
-        }
+        
 
         private bool hasShot;
         private void checkForShoot()
         {
             ShootDir = getDirectionFromRotation();
-            if (controller.IsShooting)
+            /*if (controller.IsShooting)
             {
                 if (!hasShot)
                 {
@@ -268,7 +269,7 @@ namespace CoopShooter
             else
             {
                 hasShot = false;
-            }
+            }*/
         }
 
         public void movePlayer(GameTime gameTime)
