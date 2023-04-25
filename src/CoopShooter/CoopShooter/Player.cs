@@ -12,37 +12,30 @@ using RhythmGameLibrary;
 
 namespace CoopShooter
 {
-    public class Player : CollidableSprite
+    public class Player : AnimatableSprite
     {
         public int Level;
         public bool HasShield;
         PlayerController controller;
         float acceleration;
         float friction;
-        
         float maxSpeed;
         public int GunLevel { get { return guns.ActiveGuns; } }
-
         public Vector2 ShootDir;
-
         Vector2 rotationDir;
-
-        Texture2D deadTexture;
-        Texture2D liveTexture;
-
         public int Kills;
-        
         //create a timer that needs to finish before player can fire again. check if this is complete before spawning an object(wont need this if take rhythm approach)
         GunController guns;
-
         public int Range;
-
         Texture2D ShieldTexture;
-
         Timer fireTimer;
+        float originalScale;
+        float scaleIncrease;
 
-        public Player(Game game, int playerNumber ,string texturename, int frames, float frameTime, Camera camera) : base(game, texturename, camera)
+        public Player(Game game, int playerNumber ,AnimationData anim, int frames, float frameTime, Camera camera) : base(game, anim, camera)
         {
+            originalScale = scale;
+            scaleIncrease = 0.05f;
             Range = 200;
             guns = new GunController(game, this, camera);
             this.camera = camera;
@@ -52,10 +45,8 @@ namespace CoopShooter
             maxSpeed= 1.0f;
             acceleration = 0.06f;
             friction = 0.02f;
-
             fireTimer = new Timer(600);
             fireTimer.Elapsed += shootProjectiles;
-            
         }
 
         void shootProjectiles(Object o, ElapsedEventArgs e)
@@ -70,16 +61,19 @@ namespace CoopShooter
         public void AddGun()
         {
             guns.AddGun();
+            IncreaseScale(scaleIncrease);
         }
 
         public void UpgradeRange(int r)
         {
             Range += r;
+            IncreaseScale(scaleIncrease);
         }
 
         public void AddShield()
         {
             HasShield = true;
+            IncreaseScale(scaleIncrease);
         }
 
         public void UpgradeReloadSpeed(int s)
@@ -92,24 +86,20 @@ namespace CoopShooter
             base.Draw(gameTime);
             if(HasShield)
             {
-                spriteBatch.Begin();
-                //maybe abstract this into a "drawAdditionLayer" method in sprite or something
-                spriteBatch.Draw(ShieldTexture,
+                DrawLayer(ShieldTexture,
                 new Vector2(Rect.X + ShieldTexture.Width, Rect.Y + ShieldTexture.Height),
                 null,
                 Color.White * transparency,
                 Rotation,
                 origin,
-                scale,
-                effect,
-                0);
-                spriteBatch.End();
+                scale);
             }
         }
 
         #endregion
         public void ResetPlayer(Vector2 startPos)
         {
+            SetScale(originalScale);
             guns.Reset();
             Level = 0;
             Kills = 0;
@@ -120,15 +110,14 @@ namespace CoopShooter
         protected override void LoadContent()
         {
             base.LoadContent();
-            deadTexture = Game.Content.Load<Texture2D>("TestPlayerDead");
             ShieldTexture = Game.Content.Load<Texture2D>("Shield");
-            liveTexture = spriteTexture;
         }
 
         public void AddScore()
         {
             Kills++;
             Level++;
+            
         }
 
         protected override void updateRotation()
@@ -151,20 +140,12 @@ namespace CoopShooter
         {
             switch (State) {
                 case SpriteState.alive:
-                    if(spriteTexture != liveTexture)
-                    {
-                        spriteTexture = liveTexture;
-                    }
                     if (!fireTimer.Enabled)
                     {
                         fireTimer.Start();
                     }
                     break;
                 case SpriteState.dead:
-                    if (spriteTexture != deadTexture)
-                    {
-                        spriteTexture = deadTexture;
-                    }
                     break;
             }
         }
@@ -239,7 +220,6 @@ namespace CoopShooter
             switch (obj.tag)
             {
                 case CollisionTag.Enemy:
-                    spriteTexture = liveTexture;
                     break;
                 case CollisionTag.Player:
                     break;
@@ -251,8 +231,6 @@ namespace CoopShooter
         {
             rotationDir = Vector2.Normalize(Position - otherpos);
         }
-
-        
 
         private bool hasShot;
         private void checkForShoot()
@@ -271,13 +249,11 @@ namespace CoopShooter
                 hasShot = false;
             }*/
         }
-
         public void movePlayer(GameTime gameTime)
         {
             Position += velocity * (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             addFriction();
         }
-
         private void setVelocity()
         {
             if(Direction.X > 0)
@@ -322,7 +298,6 @@ namespace CoopShooter
                 }
             }
         }
-
         private void keepOnScreen()
         {
             if(Rect.Left + Rect.Width > GraphicsDevice.Viewport.Width || Rect.Left < 0)
@@ -350,5 +325,6 @@ namespace CoopShooter
                 velocity.Y *= -1;
             }
         }
+
     }
 }

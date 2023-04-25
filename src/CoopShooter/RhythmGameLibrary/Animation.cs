@@ -15,7 +15,7 @@ namespace RhythmGameLibrary
 
         private Texture2D texture;
         List<Rectangle> _sourceRectangles;
-        int frames;
+        public int frames;
         int frame;
         float frameTime;
         float frameTimeLeft;
@@ -67,10 +67,9 @@ namespace RhythmGameLibrary
             }
         }
 
-        public void Draw(Vector2 pos, SpriteBatch s, Rectangle Rect)
+        public void Draw(Vector2 pos, SpriteBatch s)
         {
             s.Draw(texture, pos, _sourceRectangles[frame], Color.White , 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 1);
-            
         }
 
         public void Draw(Vector2 pos, SpriteBatch s, float transparency, float scale, float rotation, Vector2 origin)

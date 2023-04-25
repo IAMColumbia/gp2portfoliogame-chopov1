@@ -28,7 +28,6 @@ namespace RhythmGameLibrary
         protected float scale;
         public float Rotation { get; protected set; }
         protected float transparency;
-        protected float rotationVelocity;
         protected Vector2 origin;
 
         protected Camera camera;
@@ -43,13 +42,37 @@ namespace RhythmGameLibrary
             TextureName = texturename;
             scale = 1.8f;
             Rotation = 0;
-            rotationVelocity = 0.1f;
             transparency = 1;
+        }
+
+        protected virtual void IncreaseScale(float increase)
+        {
+            scale += increase;
+            Rect.Width = (int)(spriteTexture.Width * this.scale);
+            Rect.Height = (int)(spriteTexture.Height * this.scale);
+        }
+
+        protected virtual void SetScale(float scale)
+        {
+            this.scale = scale;
+            Rect.Width = (int)(spriteTexture.Width * this.scale);
+            Rect.Height = (int)(spriteTexture.Height * this.scale);
         }
 
         public void SetRotation(float rotation)
         {
             Rotation = rotation;
+        }
+
+        protected Vector2 rotateVec(float rotMod, Vector2 vec)
+        {
+            if (rotMod <= 0)
+            {
+                return vec;
+            }
+            return new Vector2(
+            (float)(vec.X * Math.Cos(rotMod) - vec.Y * Math.Sin(rotMod)),
+            (float)(vec.X * Math.Sin(rotMod) + vec.Y * Math.Cos(rotMod)));
         }
 
         protected override void LoadContent()
@@ -84,7 +107,6 @@ namespace RhythmGameLibrary
         {
             Rect.X = (int)Position.X;
             Rect.Y = (int)Position.Y;
-           
         }
 
         public void SetPosition(float x, float y)
@@ -115,6 +137,21 @@ namespace RhythmGameLibrary
             base.Draw(gameTime);
         }
 
+        protected void DrawLayer(Texture2D texture, Vector2 pos, Rectangle? srcrect, Color color, float rot, Vector2 orig, float scale)
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(texture,
+                pos,
+                srcrect,
+                color,
+                rot,
+                orig,
+                scale,
+                effect,
+                0);
+            spriteBatch.End();
+        }
+
         protected void drawDebugMarkers(SpriteBatch sb)
         {
             sb.Draw(spriteMarker, new Vector2(Rect.Left, Rect.Top), Color.White);
@@ -124,13 +161,13 @@ namespace RhythmGameLibrary
 
         }
 
-        public void Load()
+        public virtual void Load()
         {
             Enabled = true;
             Visible = true;
         }
 
-        public void UnLoad()
+        public virtual void UnLoad()
         {
             Enabled = false;
             Visible = false;

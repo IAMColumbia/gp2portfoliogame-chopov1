@@ -30,7 +30,23 @@ namespace CoopShooter
         {
             frames = anim.frames;
             frameTime = anim.frameTime;
+            
         }
+
+        protected override void IncreaseScale(float increase)
+        {
+            scale += increase;
+            Rect.Width = (int)((spriteTexture.Width/frames) * this.scale);
+            Rect.Height = (int)(spriteTexture.Height * this.scale);
+        }
+
+        protected override void SetScale(float scale)
+        {
+            this.scale = scale;
+            Rect.Width = (int)((spriteTexture.Width/frames) * this.scale);
+            Rect.Height = (int)(spriteTexture.Height * this.scale);
+        }
+
 
         protected override void LoadContent()
         {

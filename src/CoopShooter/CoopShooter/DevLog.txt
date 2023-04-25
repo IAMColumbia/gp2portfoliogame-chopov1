@@ -4,3 +4,5 @@ I also think i tried to use a programming pattern where one was not needed, I th
 
 
 I want to change the score to time, as the core focus of the game seems to be about staying alive. The guns seem offensive but really they help you stave off death longer. especially since this is an arcade game I feel it should always result in death anyways.
+
+Rotate Rectangles With Sprite Rotation (write a rotation matrix)

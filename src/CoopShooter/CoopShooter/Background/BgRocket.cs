@@ -63,7 +63,7 @@ namespace CoopShooter
         {
             if(Visible)
             {
-                anim.Draw(Position, s, Rect);
+                anim.Draw(Position, s);
             }
         }
 

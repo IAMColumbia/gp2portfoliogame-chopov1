@@ -16,8 +16,8 @@ namespace CoopShooter
         public bool ResetGame { get { return p1.State == SpriteState.dead || p2.State == SpriteState.dead; } set { } }
         public PlayerManager(Game game, Camera camera) : base(game) {
             Game.Components.Add(this);
-            p1 = new Player(game, 0, "TestShip2", 1, 1, camera);
-            p2 = new Player(game, 1, "TestShip1", 1, 2, camera);
+            p1 = new Player(game, 0, new AnimationData("SpaceShipBlue", 3, 0.2f), 1, 1, camera);
+            p2 = new Player(game, 1, new AnimationData("SpaceShipPurple", 3, 0.2f), 1, 2, camera);
             p2.Position = p1.Position + new Vector2(200, 200);
         }
 
