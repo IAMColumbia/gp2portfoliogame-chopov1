@@ -156,5 +156,10 @@ namespace RhythmGameLibrary
         {
             currentOverlaps.Add(obj);
         }
+
+        public PixelCollisonData GetPixelCollisonData()
+        {
+            return new PixelCollisonData(Transform, TextureWidth, TextureHeight, SpriteTextureData);
+        }
     }
 }

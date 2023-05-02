@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Xml;
+using CoopShooter;
 
 namespace RhythmGameLibrary
 {
@@ -23,6 +24,7 @@ namespace RhythmGameLibrary
         protected SpriteBatch spriteBatch;
         protected SpriteEffects effect;
 
+        public Color[] SpriteTextureData;
         protected Texture2D spriteTexture;
         public string TextureName;
         protected float scale;
@@ -34,6 +36,14 @@ namespace RhythmGameLibrary
 
         protected Texture2D spriteMarker;
         protected bool showMarkers;
+
+        public Matrix Transform => transform;
+        protected Matrix transform;
+
+        public virtual int TextureWidth { get { return spriteTexture.Width; } }
+        public int TextureHeight { get { return spriteTexture.Height; } }
+
+        
         public Sprite(Game game, string texturename, Camera camera) : base(game)
         {
             Game.Components.Add(this);
@@ -45,6 +55,13 @@ namespace RhythmGameLibrary
             transparency = 1;
         }
 
+      
+        protected void setSpriteData()
+        {
+            this.SpriteTextureData =
+                    new Color[this.spriteTexture.Width * this.spriteTexture.Height];
+            this.spriteTexture.GetData(this.SpriteTextureData);
+        }
         protected virtual void IncreaseScale(float increase)
         {
             scale += increase;
@@ -85,14 +102,40 @@ namespace RhythmGameLibrary
             origin = new Vector2(this.spriteTexture.Width / 2, this.spriteTexture.Height / 2);
             Rect.Width = (int)(spriteTexture.Width * this.scale);
             Rect.Height = (int)(spriteTexture.Height * this.scale);
+            setSpriteData();
         }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            updateRectangeForDrawing();
             updateRotation();
+            updateTransformMatrix();
+            updateRectangle();
+            
         }
 
+        protected virtual void updateRectangle()
+        {
+            Vector2 topLeft = Vector2.Transform(Vector2.Zero, transform);
+            Vector2 topRight = Vector2.Transform(new Vector2(spriteTexture.Width, 0), transform);
+            Vector2 bottomLeft = Vector2.Transform(new Vector2(0, spriteTexture.Height), transform);
+            Vector2 bottomRight = Vector2.Transform(new Vector2(spriteTexture.Width, spriteTexture.Height), transform);
+
+            Vector2 min = new Vector2(MathExtension.Min(topLeft.X, topRight.X, bottomLeft.X, bottomRight.X), MathExtension.Min(topLeft.Y, topRight.Y, bottomRight.Y, bottomLeft.Y));
+            Vector2 max = new Vector2(MathExtension.Max(topLeft.X, topRight.X, bottomLeft.X, bottomRight.X), MathExtension.Max(topLeft.Y, topRight.Y, bottomRight.Y, bottomLeft.Y));
+
+            Rect = new Rectangle((int)min.X, (int)min.Y, (int)(max.X - min.X), (int)(max.Y-min.Y));
+        }
+
+        void updateTransformMatrix()
+        {
+            //SRT Reverse Origin * Scale * rotation * translate
+            transform =  Matrix.CreateTranslation(new Vector3((-origin), 0)) * 
+                         Matrix.CreateScale(scale) * 
+                         Matrix.CreateRotationZ(Rotation) * 
+                         Matrix.CreateTranslation(new Vector3(Position, 0));
+
+
+        }
         protected virtual void updateRotation()
         {
             Rotation = (float)Math.Atan2((double)Direction.Y, (double)Direction.X);
@@ -102,13 +145,6 @@ namespace RhythmGameLibrary
         {
             return new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
         }
-
-        private void updateRectangeForDrawing()
-        {
-            Rect.X = (int)Position.X;
-            Rect.Y = (int)Position.Y;
-        }
-
         public void SetPosition(float x, float y)
         {
             Position = new Vector2(x, y);
@@ -125,7 +161,7 @@ namespace RhythmGameLibrary
                 drawDebugMarkers(spriteBatch);
             }
             spriteBatch.Draw(spriteTexture,
-                new Vector2(Rect.X + spriteTexture.Width, Rect.Y + spriteTexture.Height),
+                Position,
                 null,
                 Color.White * transparency,
                 Rotation,

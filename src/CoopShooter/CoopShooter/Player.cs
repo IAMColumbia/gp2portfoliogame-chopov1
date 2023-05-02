@@ -87,7 +87,7 @@ namespace CoopShooter
             if(HasShield)
             {
                 DrawLayer(ShieldTexture,
-                new Vector2(Rect.X + ShieldTexture.Width, Rect.Y + ShieldTexture.Height),
+                Position,
                 null,
                 Color.White * transparency,
                 Rotation,
@@ -120,10 +120,7 @@ namespace CoopShooter
             
         }
 
-        protected override void updateRotation()
-        {
-            Rotation = (float)Math.Atan2((double)rotationDir.Y, (double)rotationDir.X);
-        }
+        
 
         public override void Update(GameTime gameTime)
         {
@@ -134,6 +131,11 @@ namespace CoopShooter
             checkForShoot();
             keepOnScreen();
             setVelocity();
+        }
+
+        protected override void updateRotation()
+        {
+            Rotation = (float)Math.Atan2((double)rotationDir.Y, (double)rotationDir.X);
         }
 
         protected override void StateBasedUpdate()
@@ -304,7 +306,7 @@ namespace CoopShooter
             {
                 if(Rect.Left < 0)
                 {
-                    Position.X = 1;
+                    Position.X = 1 + Rect.Width;
                 }
                 else
                 {
@@ -316,7 +318,7 @@ namespace CoopShooter
             {
                 if(Rect.Top < 0)
                 {
-                    Position.Y = 1;
+                    Position.Y = 1 + Rect.Height;
                 }
                 else
                 {

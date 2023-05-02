@@ -1,4 +1,5 @@
-﻿using CSCore.XAudio2.X3DAudio;
+﻿using CoopShooter;
+using CSCore.XAudio2.X3DAudio;
 using Microsoft.Xna.Framework;
 using RhythmGameLibrary;
 using System;
@@ -34,6 +35,8 @@ namespace RhythmGameLibrary
 
         public void SetVelocity(Vector2 vel);
         public Vector2 GetVelocity();
+
+        public PixelCollisonData GetPixelCollisonData();
     }
     public class CollisionManager : GameComponent
     {
@@ -110,8 +113,11 @@ namespace RhythmGameLibrary
                     }
                     if (ObjectsCollide(ObjA.GetRect(), ObjB.GetRect()))
                     {
-                        ObjA.OnOverlap(ObjB.getObjInfo());
-                        ObjB.OnOverlap(ObjA.getObjInfo());
+                        if(PixelCollisionMethods.PerPixelCollisionWTansform(ObjA.GetPixelCollisonData(), ObjB.GetPixelCollisonData()))
+                        {
+                            ObjA.OnOverlap(ObjB.getObjInfo());
+                            ObjB.OnOverlap(ObjA.getObjInfo());
+                        }
                     }
                 }
             }
