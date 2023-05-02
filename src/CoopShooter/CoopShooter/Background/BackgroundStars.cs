@@ -18,7 +18,6 @@ namespace CoopShooter
 
         List<BgPlanet> planets;
 
-        BgRocket rocket;
 
         public BackgroundStars(Game game, Camera camera) : base(game)
         {
@@ -26,7 +25,8 @@ namespace CoopShooter
             this.camera = camera;
             stars = new List<BgStar>();
             planets = new List<BgPlanet>();
-            //rocket = new BgRocket(game, "Rocket-Sheet", camera);
+            setupStars();
+            setupPlanets();
         }
 
         protected override void LoadContent()
@@ -34,8 +34,6 @@ namespace CoopShooter
             base.LoadContent();
             star = Game.Content.Load<Texture2D>("BackgroundStar");
             sb = new SpriteBatch(Game.GraphicsDevice);
-            setupStars();
-            setupPlanets();
         }
         void setupStars()
         {

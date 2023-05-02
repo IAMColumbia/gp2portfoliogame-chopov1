@@ -27,6 +27,7 @@ namespace CoopShooter
         //create a timer that needs to finish before player can fire again. check if this is complete before spawning an object(wont need this if take rhythm approach)
         GunController guns;
         public int Range;
+        int startingRange;
         Texture2D ShieldTexture;
         Timer fireTimer;
         float originalScale;
@@ -36,7 +37,8 @@ namespace CoopShooter
         {
             originalScale = scale;
             scaleIncrease = 0.05f;
-            Range = 200;
+            startingRange = 100;
+            Range = startingRange;
             guns = new GunController(game, this, camera);
             this.camera = camera;
             colInfo.tag = CollisionTag.Player;
@@ -100,6 +102,7 @@ namespace CoopShooter
         public void ResetPlayer(Vector2 startPos)
         {
             SetScale(originalScale);
+            Range = startingRange;
             guns.Reset();
             Level = 0;
             Kills = 0;

@@ -30,8 +30,8 @@ namespace CoopShooter
             menuController = new MenuController();
             sceneManager = manager;
             camera = new Camera(game);
-            bg = new BackgroundStars(game, camera);
             cm = new CollisionManager(game);
+            bg = new BackgroundStars(game, camera);
             dts = new DynamicTextSpawner(game, camera);
             playerManager = new PlayerManager(game, camera);
             enemies = new EnemyManager(game, playerManager, camera);

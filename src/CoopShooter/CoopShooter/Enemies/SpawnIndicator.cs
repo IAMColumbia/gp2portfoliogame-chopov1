@@ -90,8 +90,8 @@ namespace CoopShooter.Enemies
         int count = 0;
         if (m != 0f)
         {
-            intersections[count++] = new Vector2((rect.Top - b) / m, rect.Top);
-            intersections[count++] = new Vector2((rect.Bottom - b) / m, rect.Bottom);
+            intersections[count++] = new Vector2((rect.Top - b) / m, rect.Top + (spriteTexture.Height/2));
+            intersections[count++] = new Vector2((rect.Bottom - b) / m, rect.Bottom+ (spriteTexture.Height / 2));
         }
             else
             {
@@ -99,7 +99,7 @@ namespace CoopShooter.Enemies
             }
         if (outside.X != inside.X)
         {
-            intersections[count++] = new Vector2(rect.Left, m * rect.Left + b);
+            intersections[count++] = new Vector2(rect.Left + (spriteTexture.Width / 2), m * rect.Left + b);
             intersections[count++] = new Vector2(rect.Right, m * rect.Right + b);
         }
 
