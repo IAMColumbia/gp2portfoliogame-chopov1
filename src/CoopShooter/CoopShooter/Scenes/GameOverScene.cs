@@ -22,6 +22,7 @@ namespace CoopShooter
         public override void loadScene()
         {
             gameOverUI.HighScore = sceneManager.HighScore;
+            gameOverUI.timeAlive = sceneManager.TimeAlive;
             base.loadScene();
         }
 

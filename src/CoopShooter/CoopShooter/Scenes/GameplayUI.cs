@@ -20,7 +20,8 @@ namespace CoopShooter
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            DrawCustomString(ScoreFont, playerManager.TotalKills.ToString(), 30,Color.Wheat);
+            DrawCustomString(ScoreFont, "Kills: " + playerManager.TotalKills.ToString(), 100,Color.Wheat);
+            DrawCustomString(ScoreFont, playerManager.GetAliveTime(), 30, Color.Wheat);
             spriteBatch.End();
         }
     }

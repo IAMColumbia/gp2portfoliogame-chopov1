@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RhythmGameLibrary.Sprite" Collapsed="true">
+    <Position X="13.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Orientation="Bottom" Position="1.3" />
+  </Class>
+  <Class Name="RhythmGameLibrary.ShakeableCamera" Collapsed="true">
+    <Position X="14.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.SongPlayer" Collapsed="true">
+    <Position X="16.5" Y="12" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.Animation" Collapsed="true">
+    <Position X="16.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.Camera" Collapsed="true">
+    <Position X="14" Y="6.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RhythmGameLibrary.FileReader" Collapsed="true">
+    <Position X="18.25" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.Game1" Collapsed="true">
+    <Position X="20" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.GameStateManager" Collapsed="true">
+    <Position X="16.5" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.InputHandler" Collapsed="true">
+    <Position X="18.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.MainMenu" Collapsed="true">
+    <Position X="18.25" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.MainMenuUI" Collapsed="true">
+    <Position X="15" Y="14.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.MenuController" Collapsed="true">
+    <Position X="18.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.MenuUI" Collapsed="true">
+    <Position X="13" Y="14.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RhythmGameLibrary.PixelCollisionMethods" Collapsed="true">
+    <Position X="20" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.PixelCollisonData" Collapsed="true">
+    <Position X="16.5" Y="7" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.RhythmManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="7" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RhythmGameLibrary.Scene" Collapsed="true">
+    <Position X="13.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.SceneManager" Collapsed="true">
+    <Position X="14.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CoopShooter.MathExtension" Collapsed="true">
+    <Position X="13.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="RhythmGameLibrary.CollidableSprite" Collapsed="true">
+    <Position X="22.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQIIAAEECAgAAAEEAAACgAAIBBAAEAQAAQACDgAAQQ=</HashCode>
+      <FileName>CollidableSprite.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="RhythmGameLibrary.CollisionManager" Collapsed="true">
+    <Position X="24.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAEAEAAAAAQQgUAABAABAAIBgQAAgAQJgAABJAIA=</HashCode>
+      <FileName>CollisionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PowerUps.PowerUp" Collapsed="true">
+    <Position X="27.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAABAAAAACAAAAA=</HashCode>
+      <FileName>PowerUps\PowerUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PowerUps.PowerUpManager" Collapsed="true">
+    <Position X="35.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAIAAAAAAAAAABAAAAAgAAAAAAAAI=</HashCode>
+      <FileName>PowerUps\PowerUpManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PowerUps.PowerUpSpawner" Collapsed="true">
+    <Position X="33.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACIAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>PowerUps\PowerUpSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PowerUps.RangePowerUp" Collapsed="true">
+    <Position X="26.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PowerUps\RangePowerUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PowerUps.RangePowerUpSpawner" Collapsed="true">
+    <Position X="35" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>PowerUps\RangePowerUpSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PowerUps.ShieldPowerUp" Collapsed="true">
+    <Position X="28.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PowerUps\ShieldPowerUp.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PowerUps.ShieldPowerUpSpawner" Collapsed="true">
+    <Position X="34" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>PowerUps\ShieldPowerUpSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Enemies.Enemy" Collapsed="true">
+    <Position X="34.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAABAAAAAAAAAAAAAAQAAAAAAACAQAAg=</HashCode>
+      <FileName>Enemies\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Enemies.EnemyManager" Collapsed="true">
+    <Position X="36" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAgAAAAQAAAA=</HashCode>
+      <FileName>Enemies\EnemyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Enemies.EnemySpawner" Collapsed="true">
+    <Position X="34.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACIAAAAAAAAAAAAAAAAAACAIAAAAAAAAAA=</HashCode>
+      <FileName>Enemies\EnemySpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Enemies.SpawnIndicator" Collapsed="true">
+    <Position X="36" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAACgAkBAAAAAQAAAQAAAAAAAAAQCAAAAAAQ=</HashCode>
+      <FileName>Enemies\SpawnIndicator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.DynamicText" Collapsed="true">
+    <Position X="30.5" Y="5.5" Width="1.5" />
+    <InheritanceLine Type="RhythmGameLibrary.Sprite" FixedToPoint="true">
+      <Path>
+        <Point X="14.25" Y="12.25" />
+        <Point X="14.25" Y="11.75" />
+        <Point X="15.167" Y="11.75" Type="JumpStart" />
+        <Point X="15.333" Y="11.75" Type="JumpEnd" />
+        <Point X="21.667" Y="11.75" Type="JumpStart" />
+        <Point X="21.833" Y="11.75" Type="JumpEnd" />
+        <Point X="22.917" Y="11.75" Type="JumpStart" />
+        <Point X="23.083" Y="11.75" Type="JumpEnd" />
+        <Point X="23.167" Y="11.75" Type="JumpStart" />
+        <Point X="23.458" Y="11.75" Type="JumpEnd" />
+        <Point X="25.917" Y="11.75" Type="JumpStart" />
+        <Point X="26.083" Y="11.75" Type="JumpEnd" />
+        <Point X="26.917" Y="11.75" Type="JumpStart" />
+        <Point X="27.083" Y="11.75" Type="JumpEnd" />
+        <Point X="28.667" Y="11.75" Type="JumpStart" />
+        <Point X="28.833" Y="11.75" Type="JumpEnd" />
+        <Point X="30.167" Y="11.75" Type="JumpStart" />
+        <Point X="30.333" Y="11.75" Type="JumpEnd" />
+        <Point X="31.062" Y="11.75" />
+        <Point X="31.062" Y="6.191" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAYABAAAAAAAAgBAAAAAAAAAAAAAAAAAAQAACAAAAAQ=</HashCode>
+      <FileName>DynamicText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.DynamicTextSpawner" Collapsed="true">
+    <Position X="33.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>DynamicTextSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Game1" Collapsed="true">
+    <Position X="31.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAwAAAAAAAAAAAAAAAAACAIAAAAAAAAQ=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.GameOverScene" Collapsed="true">
+    <Position X="28" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAE=</HashCode>
+      <FileName>Scenes\GameOverScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.GameOverUI" Collapsed="true">
+    <Position X="35.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAgAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Scenes\GameOverUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.GameplayScene" Collapsed="true">
+    <Position X="26.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAgAAAAYMAAAAAEAAAQAAAIABEAQABAgAAAA=</HashCode>
+      <FileName>Scenes\GameplayScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.GameplayUI" Collapsed="true">
+    <Position X="29.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\GameplayUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.BgStar" Collapsed="true">
+    <Position X="27.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQEAAAAAAAAAAAAIAAAAAAAAACAAAAEAAIAAAAAAAA=</HashCode>
+      <FileName>Background\BgStar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.BgPlanet" Collapsed="true">
+    <Position X="21.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQEAAAAAAAAAQAAIAAAAAAAAAAAAAAEAAIAAAAAAAQ=</HashCode>
+      <FileName>Background\BgPlanet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.BackgroundStars" Collapsed="true">
+    <Position X="31.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIBAAgAAAgACAAAAAAAAAACAAAAQAAAAAAgAAAQ=</HashCode>
+      <FileName>Background\BackgroundStars.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.AnimatableSprite" Collapsed="true">
+    <Position X="22.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgQAAAAAAIQAACAAAAAACAAAAwAAAAQ=</HashCode>
+      <FileName>AnimatableSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.GameStateManager" Collapsed="true">
+    <Position X="31.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAIAA=</HashCode>
+      <FileName>GameStateManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.GunController" Collapsed="true">
+    <Position X="33.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAABAAAAAAABAAAAAAAgIAACAAAAAABAAAEAAIAAAA=</HashCode>
+      <FileName>GunController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.MainMenu" Collapsed="true">
+    <Position X="19" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Scenes\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.MainMenuUI" Collapsed="true">
+    <Position X="26.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\MainMenuUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.MovingSprite" Collapsed="true">
+    <Position X="25.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEBAAAAAAoAAQAIAAAAAAAAAAAAYAAAARAASAAABo=</HashCode>
+      <FileName>MovingSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.MovingSpriteManager" Collapsed="true">
+    <Position X="32" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAhACABAgAAQAAAAAAAAAQAAAAAAEAEgUAAQAAAAA=</HashCode>
+      <FileName>MovingSpriteManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CoopShooter.mySceneManager" Collapsed="true">
+    <Position X="21" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAgACAAAAAQAAAAAAgAAAQAAAAAACAAAAAAgAAAAA=</HashCode>
+      <FileName>mySceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PauseScene" Collapsed="true">
+    <Position X="21" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAEA=</HashCode>
+      <FileName>Scenes\PauseScene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PauseUI" Collapsed="true">
+    <Position X="30.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scenes\PauseUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Player" Collapsed="true">
+    <Position X="23.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQABEgIgAEwDgUCCCAAwJAAAQAAxAwJAAgAAigAQQQ=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.PlayerManager" Collapsed="true">
+    <Position X="27.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAAEAAAIBUAAIAAEAAAQAgAACAAAAAAA=</HashCode>
+      <FileName>PlayerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Projectile" Collapsed="true">
+    <Position X="21" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAgAACAAAAAAAAAAAACAQAAAAAAACAAAAA=</HashCode>
+      <FileName>Projectiles\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.ProjectileSpawner" Collapsed="true">
+    <Position X="24.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAgAACABAQABAAAAEAAIEAAAAIBIAIAAAAAAAA=</HashCode>
+      <FileName>Projectiles\ProjectileSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.RangedProjectile" Collapsed="true">
+    <Position X="21" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAIAAAAAAAAAAAAAAAACAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Projectiles\RangedProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.RangedProjectileSpawner" Collapsed="true">
+    <Position X="24.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Projectiles\RangedProjectileSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoopShooter.Spawner" Collapsed="true">
+    <Position X="29.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQkgACAAgCAAQAAAACAEAAAAQAAIAABIAEAAAAAAAA=</HashCode>
+      <FileName>Spawner.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Struct Name="RhythmGameLibrary.CollisionObj" Collapsed="true">
+    <Position X="24.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>CollisionManager.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CoopShooter.AnimationData" Collapsed="true">
+    <Position X="31.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAQAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>AnimatableSprite.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="RhythmGameLibrary.ISceneComponenet" Collapsed="true">
+    <Position X="16.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

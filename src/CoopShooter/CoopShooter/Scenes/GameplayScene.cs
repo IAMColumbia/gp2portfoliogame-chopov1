@@ -53,6 +53,7 @@ namespace CoopShooter
 
         protected override void SceneUpdate()
         {
+            sceneManager.TimeAlive = playerManager.GetAliveTime();
             menuController.Update();
             base.SceneUpdate();
             if (menuController.PressedBack)
@@ -76,6 +77,13 @@ namespace CoopShooter
             {
                 sceneManager.HighScore = playerManager.TotalKills;
             }
+        }
+
+        public override void loadScene()
+        {
+            base.loadScene();
+            //change this as it resets the timer when coming from the pause menu
+            playerManager.RestartAliveTimer();
         }
 
     }
