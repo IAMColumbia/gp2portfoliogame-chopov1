@@ -27,3 +27,5 @@ Rotate Rectangles With Sprite Rotation (write a rotation matrix) - fixed cuz doi
 
 Timer needs to be polished if decide to stay. Add 0's to single digits, limit decimal place of milliseconds shown. Also timer resets upon loading of game scene, so even when u just pause and resume. Fix this if decide to stay.
 
+Using ma gic number to reset objects. change it to a variable. might need dif ones for each type of spawned ubject
+

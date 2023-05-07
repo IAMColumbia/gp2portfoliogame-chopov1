@@ -23,6 +23,12 @@ namespace CoopShooter.Enemies
             indicator = new SpawnIndicator(Game, camera, this);
         }
 
+        public override void SetScale(float scale)
+        {
+            base.SetScale(scale);
+            indicator.SetScale(scale);
+        }
+
         public void Activate()
         {
             indicator.Activate();

@@ -69,7 +69,7 @@ namespace RhythmGameLibrary
             Rect.Height = (int)(spriteTexture.Height * this.scale);
         }
 
-        protected virtual void SetScale(float scale)
+        public virtual void SetScale(float scale)
         {
             this.scale = scale;
             Rect.Width = (int)(spriteTexture.Width * this.scale);
@@ -133,8 +133,6 @@ namespace RhythmGameLibrary
                          Matrix.CreateScale(scale) * 
                          Matrix.CreateRotationZ(Rotation) * 
                          Matrix.CreateTranslation(new Vector3(Position, 0));
-
-
         }
         protected virtual void updateRotation()
         {
@@ -175,7 +173,7 @@ namespace RhythmGameLibrary
 
         protected void DrawLayer(Texture2D texture, Vector2 pos, Rectangle? srcrect, Color color, float rot, Vector2 orig, float scale)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform);
             spriteBatch.Draw(texture,
                 pos,
                 srcrect,

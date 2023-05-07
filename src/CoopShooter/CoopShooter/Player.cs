@@ -123,8 +123,6 @@ namespace CoopShooter
             
         }
 
-        
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -309,11 +307,11 @@ namespace CoopShooter
             {
                 if(Rect.Left < 0)
                 {
-                    Position.X = 1 + Rect.Width;
+                    Position.X = 1 + (Rect.Width/2);
                 }
                 else
                 {
-                    Position.X = GraphicsDevice.Viewport.Width - 1 - Rect.Width;
+                    Position.X = GraphicsDevice.Viewport.Width - 1 - (Rect.Width/2);
                 }
                 velocity.X *= -1;
             }
@@ -321,11 +319,11 @@ namespace CoopShooter
             {
                 if(Rect.Top < 0)
                 {
-                    Position.Y = 1 + Rect.Height;
+                    Position.Y = 1 + (Rect.Height/2);
                 }
                 else
                 {
-                    Position.Y = GraphicsDevice.Viewport.Height - 1 - Rect.Height;
+                    Position.Y = GraphicsDevice.Viewport.Height - 1 - (Rect.Height/2);
                 }
                 velocity.Y *= -1;
             }

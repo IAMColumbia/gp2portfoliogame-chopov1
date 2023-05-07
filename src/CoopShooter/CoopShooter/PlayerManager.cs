@@ -27,12 +27,26 @@ namespace CoopShooter
             
         }
 
-        public string GetAliveTime()
+        public float[] GetAliveTimerFloat()
+        {
+            float[] f = new float[3];
+            f[0] = aliveTimer.Elapsed.Minutes;
+            f[1] = aliveTimer.Elapsed.Seconds;
+            f[2] = aliveTimer.Elapsed.Milliseconds;
+            return f;
+        }
+
+        public string GetAliveTimeString()
         {
             float minutes = aliveTimer.Elapsed.Minutes;
             float seconds = aliveTimer.Elapsed.Seconds;
             float milliseconds = aliveTimer.Elapsed.Milliseconds;
-            return minutes + ":" + seconds + ":" + milliseconds;
+            string s = minutes + ":" + seconds + ":" + milliseconds;
+            if (seconds < 10)
+            {
+                s = minutes + ":0" + seconds + ":" + milliseconds;
+            }
+            return s;
         }
         public void RestartAliveTimer()
         {

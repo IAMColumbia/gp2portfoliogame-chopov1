@@ -21,7 +21,7 @@ namespace CoopShooter
         {
             spriteBatch.Begin();
             DrawCustomString(ScoreFont, "Kills: " + playerManager.TotalKills.ToString(), 100,Color.Wheat);
-            DrawCustomString(ScoreFont, playerManager.GetAliveTime(), 30, Color.Wheat);
+            DrawCustomString(ScoreFont, playerManager.GetAliveTimeString(), 30, Color.Wheat);
             spriteBatch.End();
         }
     }

@@ -13,10 +13,12 @@ namespace CoopShooter.Enemies
     {
         Camera c;
         PlayerManager pm;
+        Random rand;
         public EnemySpawner(Game game, PlayerManager pm, Camera c, int numberOfObjects) : base(game, c, numberOfObjects)
         {
             this.pm = pm;
             this.c = c;
+            rand = new Random();    
         }
 
         public override Sprite createSpawnableObject()
@@ -33,6 +35,7 @@ namespace CoopShooter.Enemies
                     Sprite objToSpawn = objects.Dequeue();
                     objects.Enqueue(objToSpawn);
                     objToSpawn.SetPosition(pos.X, pos.Y);
+                    ((Enemy)objToSpawn).SetScale(rand.Next(18, 31) * 0.1f);
                     objToSpawn.Visible = true;
                     ((Enemy)objToSpawn).SetTarget(pm.GetMidpoint());
                     ((Enemy)objToSpawn).Activate();

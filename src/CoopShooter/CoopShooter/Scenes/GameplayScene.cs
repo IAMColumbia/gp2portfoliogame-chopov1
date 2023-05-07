@@ -53,7 +53,7 @@ namespace CoopShooter
 
         protected override void SceneUpdate()
         {
-            sceneManager.TimeAlive = playerManager.GetAliveTime();
+            sceneManager.TimeAlive = playerManager.GetAliveTimeString();
             menuController.Update();
             base.SceneUpdate();
             if (menuController.PressedBack)

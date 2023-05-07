@@ -44,7 +44,7 @@ namespace CoopShooter
             Rect.Height = (int)((spriteTexture.Height )* this.scale);
         }
 
-        protected override void SetScale(float scale)
+        public override void SetScale(float scale)
         {
             this.scale = scale;
             Rect.Width = (int)((spriteTexture.Width/frames) * this.scale);

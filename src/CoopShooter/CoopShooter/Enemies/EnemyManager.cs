@@ -16,16 +16,23 @@ namespace CoopShooter.Enemies
         public EnemyManager(Game game, PlayerManager pm, Camera c) : base(game, c, pm, 200)
         {
             spawner = new EnemySpawner(Game, pm, c, 24);
-            maxSpawnOdds = 15;
+            maxSpawnOdds = 7;
             spawnOdds = maxSpawnOdds;
+        }
+
+        void IncreaseSpawnOdds()
+        {
+            /*if (playerManager.TotalLevel < maxSpawnOdds)
+            {
+                spawnOdds = (maxSpawnOdds - playerManager.TotalLevel);
+            }*/
+            spawnOdds = maxSpawnOdds - (int)playerManager.GetAliveTimerFloat()[0];
         }
 
         public override void SpawnSprite(object source, ElapsedEventArgs e)
         {
-            if(playerManager.TotalLevel < maxSpawnOdds)
-            {
-                spawnOdds = ( maxSpawnOdds - playerManager.TotalLevel);
-            }
+            IncreaseSpawnOdds();
+
             int spawn = random.Next(0, spawnOdds);
             switch (spawn)
             {
